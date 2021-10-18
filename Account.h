@@ -45,7 +45,8 @@ class Account
         class NumNegative{};
 
         /**
-         * The default constructor initializes all values to 0.
+         * The default constructor initializes account number to 10000000
+         * and balance to 0.
          */
         Account();
 
