@@ -17,24 +17,32 @@ class Account
 {
     public:
         /**
-         * Class for exception handling in constructor.
+         * Class for exception handling of account number in constructor.
          */
-        class ParameterOutOfBounds
+        class NumOutOfBounds
         {
             public:
                 /**
-                 * Sets the lower and upper bounds (inclusive) of the
-                 * expected value.
-                 * @param lower The lower bound (inclusive).
-                 * @param upper The upper bound (inclusive).
+                 * Initializes the class to hold the expected lower and upper
+                 * bounds of the value.
+                 * @param lower The lower bound of the expected value
+                 * (inclusive).
+                 * @param upper The upper bound of the expected value
+                 * (inclusive).
                  */
-                ParameterOutOfBounds(int, int);
-                int getLowerBounds() const {return lowerBounds;}
-                int getUpperBounds() const {return upperBounds;}
+                NumOutOfBounds(int, int);
+
+                int getLowerBounds() const {return lowerbounds;}
+                int getUpperBounds() const {return upperbounds;}
             private:
-                int lowerBounds;
-                int upperBounds;
+                int lowerbounds;
+                int upperbounds;
         };
+
+        /**
+         * Class for exception handling of balance in constructor.
+         */
+        class NumNegative{};
 
         /**
          * The default constructor initializes all values to 0.
