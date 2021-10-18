@@ -19,7 +19,22 @@ class Account
         /**
          * Class for exception handling in constructor.
          */
-        class ParameterOutOfBounds;
+        class ParameterOutOfBounds
+        {
+            public:
+                /**
+                 * Sets the lower and upper bounds (inclusive) of the
+                 * expected value.
+                 * @param lower The lower bound (inclusive).
+                 * @param upper The upper bound (inclusive).
+                 */
+                ParameterOutOfBounds(int, int);
+                int getLowerBounds() const {return lowerBounds;}
+                int getUpperBounds() const {return upperBounds;}
+            private:
+                int lowerBounds;
+                int upperBounds;
+        };
 
         /**
          * The default constructor initializes all values to 0.
