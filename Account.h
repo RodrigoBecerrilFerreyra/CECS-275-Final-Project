@@ -111,24 +111,24 @@ class Account
          * Getter function for balance.
          * @return balance
          */
-        int getBalance() const {return balance;}
+        double getBalance() const {return balance;}
 
         /**
          * Getter function for amountWon.
          * @return amountWon
          */
-        int getAmountWon() const {return amountWon;}
+        double getAmountWon() const {return amountWon;}
 
         /**
          * Getter function for amountLost.
          * @return amountLost
          */
-        int getAmountLost() const {return amountLost;}
+        double getAmountLost() const {return amountLost;}
 
     private:
         int accountNumber;
         int gamesPlayed;
-        int balance;
-        int amountWon;
-        int amountLost;
+        double balance;
+        double amountWon;
+        double amountLost;
 };
