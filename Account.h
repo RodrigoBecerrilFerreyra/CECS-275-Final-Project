@@ -6,6 +6,7 @@
  * @version 1
  */
 
+#include <exception>
 #include <fstream>
 
 /**
@@ -19,7 +20,7 @@ class Account
         /**
          * Class for exception handling of account number in constructor.
          */
-        class NumOutOfBounds
+        class NumOutOfBounds : public std::exception
         {
             public:
                 /**
@@ -42,7 +43,7 @@ class Account
         /**
          * Class for exception handling of balance in constructor.
          */
-        class NumNegative{};
+        class NumNegative : public std::exception{};
 
         /**
          * The default constructor initializes account number to 10000000
