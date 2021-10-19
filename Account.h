@@ -17,6 +17,9 @@
 class Account
 {
     public:
+// *****************************************************************************
+// Exception handling classes
+// *****************************************************************************
         /**
          * Class for exception handling of account number in constructor.
          */
@@ -45,6 +48,10 @@ class Account
          */
         class NumNegative : public std::exception{};
 
+// *****************************************************************************
+// constructors
+// *****************************************************************************
+
         /**
          * The default constructor initializes account number to 10000000
          * and balance to 0.
@@ -61,6 +68,14 @@ class Account
          * @throws ParameterOutOfBounds if the balance is 
          */
         Account(int, int);
+
+// *****************************************************************************
+// load and save functions
+// *****************************************************************************
+
+// *****************************************************************************
+// setter and getter functions
+// *****************************************************************************
 
         // getter functions
         /**
