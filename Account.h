@@ -48,6 +48,11 @@ class Account
          */
         class NumNegative : public std::exception{};
 
+        /**
+         * Class for exception handling of file not existing.
+         */
+        class FileNotFoundError : public std::exception{};
+
 // *****************************************************************************
 // constructors
 // *****************************************************************************
@@ -72,6 +77,18 @@ class Account
 // *****************************************************************************
 // load and save functions
 // *****************************************************************************
+
+    /**
+     * Reads the account data from the file acc_{accountNumber}.txt.
+     * @throws FileNotFoundError if the file does not exist.
+     */
+    void load();
+
+    /**
+     * Writes the account data to the file acc_{accountNumber}.txt. Overwrites
+     * the file if it exists, and creates a new file if it does not.
+     */
+    void save() const;
 
 // *****************************************************************************
 // setter and getter functions
@@ -114,6 +131,4 @@ class Account
         int balance;
         int amountWon;
         int amountLost;
-        std::ifstream infile;
-        std::ofstream outfile;
 };
