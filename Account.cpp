@@ -56,7 +56,7 @@ void Account::load()
 
 }
 
-void Account::save() const
+void Account::save()
 {
     // open file
     std::fstream outfile(getFilename().c_str(), std::ios::out);

@@ -97,7 +97,7 @@ class Account
          * Writes the account data to the file acc_{accountNumber}.txt. Overwrites
          * the file if it exists, and creates a new file if it does not.
          */
-        void save() const;
+        void save();
 
 // *****************************************************************************
 // other functions
