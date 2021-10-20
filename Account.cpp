@@ -34,13 +34,8 @@ Account::Account(int accountNumber, int balance)
 
 void Account::load()
 {
-    // build filename
-    std::string filename = "acc_";
-    filename += std::to_string(accountNumber);
-    filename += ".txt";
-
     // open file
-    std::fstream infile(filename.c_str(), std::ios::in);
+    std::fstream infile(getFilename().c_str(), std::ios::in);
     if(infile.fail())
         throw FileNotFoundError();
     
@@ -63,13 +58,8 @@ void Account::load()
 
 void Account::save() const
 {
-    // build filename
-    std::string filename = "acc_";
-    filename += std::to_string(accountNumber);
-    filename += ".txt";
-
     // open file
-    std::fstream outfile(filename.c_str(), std::ios::out);
+    std::fstream outfile(getFilename().c_str(), std::ios::out);
 
     // populate file
     outfile << "Account Number: " << accountNumber << "\n";
@@ -90,12 +80,7 @@ void Account::inputGameResults(double moneyWon, double moneyLost)
 
 bool Account::exists(bool throwExcept = false)
 {
-    // build filename
-    std::string filename = "acc_";
-    filename += std::to_string(accountNumber);
-    filename += ".txt";
-
-    std::fstream infile(filename.c_str(), std::ios::in);
+    std::fstream infile(getFilename().c_str(), std::ios::in);
     if(infile.is_open())
         if(throwExcept) throw FileNotFoundError();
         else return false;
@@ -105,4 +90,12 @@ bool Account::exists(bool throwExcept = false)
 Account::~Account()
 {
     save();
+}
+
+std::string Account::getFilename()
+{
+    std::string filename = "acc_";
+    filename += std::to_string(accountNumber);
+    filename += ".txt";
+    return filename;
 }
