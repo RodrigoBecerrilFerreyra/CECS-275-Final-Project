@@ -88,6 +88,20 @@ void Account::inputGameResults(double moneyWon, double moneyLost)
     amountLost += moneyLost;
 }
 
+bool Account::exists(bool throwExcept = false)
+{
+    // build filename
+    std::string filename = "acc_";
+    filename += std::to_string(accountNumber);
+    filename += ".txt";
+
+    std::fstream infile(filename.c_str(), std::ios::in);
+    if(infile.is_open())
+        if(throwExcept) throw FileNotFoundError();
+        else return false;
+    return true;
+}
+
 Account::~Account()
 {
     save();
