@@ -100,6 +100,22 @@ class Account
         void save() const;
 
 // *****************************************************************************
+// other functions
+// *****************************************************************************
+
+        /**
+         * Checks if the account registered with the account number exists
+         * (checks whether or not a file with the filename
+         * acc_{accountNumber}.txt exists).
+         * @param throwExcept (Optional) if true, throws an exception if the
+         * file does not exist. Defaults to false.
+         * @return true if file exists, false otherwise
+         * @throws FileNotFoundError if the file does not exist and if
+         * throwExcept is true.
+         */
+        bool exists(bool = false);
+
+// *****************************************************************************
 // setter and getter functions
 // *****************************************************************************
 
