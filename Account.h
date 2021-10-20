@@ -164,4 +164,10 @@ class Account
         double balance;
         double amountWon;
         double amountLost;
+
+        /**
+         * Gets the filename of the filename according to the account number.
+         * @return The filename of the file where the account is saved.
+         */
+        std::string getFilename();
 };
