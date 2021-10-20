@@ -80,3 +80,15 @@ void Account::save() const
 
     outfile.close();
 }
+
+void Account::inputGameResults(double moneyWon, double moneyLost)
+{
+    ++gamesPlayed;
+    amountWon += moneyWon;
+    amountLost += moneyLost;
+}
+
+Account::~Account()
+{
+    save();
+}
