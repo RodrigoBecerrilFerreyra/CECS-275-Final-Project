@@ -75,24 +75,41 @@ class Account
         Account(int, int);
 
 // *****************************************************************************
+// destructors
+// *****************************************************************************
+
+        /**
+         * Automatically saves all data when object is destroyed.
+         */
+        ~Account();
+
+// *****************************************************************************
 // load and save functions
 // *****************************************************************************
 
-    /**
-     * Reads the account data from the file acc_{accountNumber}.txt.
-     * @throws FileNotFoundError if the file does not exist.
-     */
-    void load();
+        /**
+         * Reads the account data from the file acc_{accountNumber}.txt.
+         * @throws FileNotFoundError if the file does not exist.
+         */
+        void load();
 
-    /**
-     * Writes the account data to the file acc_{accountNumber}.txt. Overwrites
-     * the file if it exists, and creates a new file if it does not.
-     */
-    void save() const;
+        /**
+         * Writes the account data to the file acc_{accountNumber}.txt. Overwrites
+         * the file if it exists, and creates a new file if it does not.
+         */
+        void save() const;
 
 // *****************************************************************************
 // setter and getter functions
 // *****************************************************************************
+
+        // setter functions
+        /**
+         * Use this function to input the results of a game of blackjack.
+         * @param moneyWon The amount of money won from the game.
+         * @param moneyLost The amount of money lost from the game.
+         */
+        void inputGameResults(double, double);
 
         // getter functions
         /**
