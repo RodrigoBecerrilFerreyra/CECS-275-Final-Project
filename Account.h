@@ -86,12 +86,6 @@ class Account
 // *****************************************************************************
 
         /**
-         * The default constructor initializes account number to 10000000
-         * and balance to 0.
-         */
-        //Account();
-
-        /**
          * This overloaded constructor allows the user to set the value for
          * two of the class's members.
          * @param accountNumber The account number of the new account.
@@ -122,26 +116,15 @@ class Account
         void load();
 
         /**
-         * Writes the account data to the file acc_{accountNumber}.txt. Overwrites
-         * the file if it exists, and creates a new file if it does not.
+         * Writes the account data to the file acc_{accountNumber}.txt.
+         * Overwrites the file if it exists, and creates a new file if it
+         * does not.
          */
         void save();
 
 // *****************************************************************************
 // other functions
 // *****************************************************************************
-
-        /**
-         * Checks if the account registered with the account number exists
-         * (checks whether or not a file with the filename
-         * acc_{accountNumber}.txt exists).
-         * @param throwExcept (Optional) if true, throws an exception if the
-         * file does not exist. Defaults to false.
-         * @return true if file exists, false otherwise
-         * @throws FileNotFoundError if the file does not exist and if
-         * throwExcept is true.
-         */
-        //bool exists(bool = false);
 
         /**
          * Stream extraction operator overload. Extracts the contents of the

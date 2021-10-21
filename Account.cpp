@@ -11,7 +11,6 @@
 #include <ostream>
 #include "Account.h"
 
-
 Account::NumOutOfBounds::NumOutOfBounds(int errval, int lower, int upper)
 {
     errorvalue = errval;
@@ -25,8 +24,6 @@ std::string Account::NumOutOfBounds::getErrorMessage()
       + "; expected value between " + std::to_string(lowerbounds)
       + " and " + std::to_string(upperbounds) + " (inclusive).";
 }
-
-//Account::Account() : Account(10000000, 0){}
 
 Account::FileNotFoundError::FileNotFoundError(std::string name)
 {
@@ -98,15 +95,6 @@ void Account::inputGameResults(double moneyWon, double moneyLost)
     balance += (moneyWon - moneyLost);
     save();
 }
-
-// bool Account::exists(bool throwExcept = false)
-// {
-//     std::fstream infile(getFilename().c_str(), std::ios::in);
-//     if(infile.is_open())
-//         if(throwExcept) throw FileNotFoundError();
-//         else return false;
-//     return true;
-// }
 
 Account::~Account()
 {
