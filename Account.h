@@ -99,7 +99,7 @@ class Account
          * positive eight-digit number.
          * @throws ParameterOutOfBounds if the balance is 
          */
-        Account(int, int);
+        Account(int accountNumber, int balance);
 
 // *****************************************************************************
 // destructors
@@ -152,7 +152,7 @@ class Account
          * @param moneyWon The amount of money won from the game.
          * @param moneyLost The amount of money lost from the game.
          */
-        void inputGameResults(double, double);
+        void inputGameResults(double moneyWon, double moneyLost);
 
         // getter functions
         /**
