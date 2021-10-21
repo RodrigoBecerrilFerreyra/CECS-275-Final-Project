@@ -32,16 +32,24 @@ class Account
                 /**
                  * Initializes the class to hold the expected lower and upper
                  * bounds of the value.
+                 * @param errval The value that caused the error.
                  * @param lower The lower bound of the expected value
                  * (inclusive).
                  * @param upper The upper bound of the expected value
                  * (inclusive).
                  */
-                NumOutOfBounds(int, int);
+                NumOutOfBounds(int errval, int lower, int upper);
 
                 int getLowerBounds() const {return lowerbounds;}
                 int getUpperBounds() const {return upperbounds;}
+
+                /**
+                 * Builds an error message and returns it.
+                 * @return A detailed error message.
+                 */
+                std::string getErrorMessage();
             private:
+                int errorvalue;
                 int lowerbounds;
                 int upperbounds;
         };
