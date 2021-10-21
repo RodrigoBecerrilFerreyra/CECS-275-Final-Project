@@ -72,7 +72,7 @@ class Account
          * The default constructor initializes account number to 10000000
          * and balance to 0.
          */
-        Account();
+        //Account();
 
         /**
          * This overloaded constructor allows the user to set the value for

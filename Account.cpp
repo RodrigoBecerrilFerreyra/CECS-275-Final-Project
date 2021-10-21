@@ -25,7 +25,7 @@ std::string Account::NumOutOfBounds::getErrorMessage()
       + " and " + std::to_string(upperbounds) + " (inclusive).";
 }
 
-Account::Account() : Account(10000000, 0){}
+//Account::Account() : Account(10000000, 0){}
 
 Account::Account(int accountNumber, int balance)
 {
