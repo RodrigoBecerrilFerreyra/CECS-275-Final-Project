@@ -6,6 +6,9 @@
  * @version 1
  */
 
+#ifndef ACCOUNT_H
+#define ACCOUNT_H
+
 #include <exception>
 #include <fstream>
 
@@ -171,3 +174,5 @@ class Account
          */
         std::string getFilename();
 };
+
+#endif//ACCOUNT_H
