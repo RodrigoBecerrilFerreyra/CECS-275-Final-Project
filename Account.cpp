@@ -27,6 +27,16 @@ std::string Account::NumOutOfBounds::getErrorMessage()
 
 //Account::Account() : Account(10000000, 0){}
 
+Account::FileNotFoundError::FileNotFoundError(std::string name)
+{
+    filename = name;
+}
+
+std::string Account::FileNotFoundError::getErrorMessage()
+{
+    return "FileNotFoundError; The file " + filename + " could not be found.";
+}
+
 Account::Account(int accountNumber, int balance)
 {
     // account number must be a positive eight-digit number
@@ -46,7 +56,7 @@ void Account::load()
     // open file
     std::fstream infile(getFilename().c_str(), std::ios::in);
     if(infile.fail())
-        throw FileNotFoundError();
+        throw FileNotFoundError(getFilename());
     
     // load all values into variables
     std::string lines[5] = {};

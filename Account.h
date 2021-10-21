@@ -62,7 +62,23 @@ class Account
         /**
          * Class for exception handling of file not existing.
          */
-        class FileNotFoundError : public std::exception{};
+        class FileNotFoundError : public std::exception
+        {
+            public:
+                /**
+                 * Sets the name of the file.
+                 * @param name The filename.
+                 */
+                FileNotFoundError(std::string name);
+
+                /**
+                 * Builds and returns an error message.
+                 * @return An error message.
+                 */
+                std::string getErrorMessage();
+            private:
+                std::string filename;
+        };
 
 // *****************************************************************************
 // constructors
