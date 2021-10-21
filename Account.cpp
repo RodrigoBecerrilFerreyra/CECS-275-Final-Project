@@ -95,6 +95,7 @@ void Account::inputGameResults(double moneyWon, double moneyLost)
     ++gamesPlayed;
     amountWon += moneyWon;
     amountLost += moneyLost;
+    balance += (moneyWon - moneyLost);
     save();
 }
 
