@@ -53,7 +53,6 @@ void Account::load()
     amountLost    = std::stod(lines[4].substr(20));
 
     infile.close();
-
 }
 
 void Account::save()
@@ -76,6 +75,7 @@ void Account::inputGameResults(double moneyWon, double moneyLost)
     ++gamesPlayed;
     amountWon += moneyWon;
     amountLost += moneyLost;
+    save();
 }
 
 bool Account::exists(bool throwExcept = false)
