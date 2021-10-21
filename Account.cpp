@@ -87,14 +87,14 @@ void Account::inputGameResults(double moneyWon, double moneyLost)
     save();
 }
 
-bool Account::exists(bool throwExcept = false)
-{
-    std::fstream infile(getFilename().c_str(), std::ios::in);
-    if(infile.is_open())
-        if(throwExcept) throw FileNotFoundError();
-        else return false;
-    return true;
-}
+// bool Account::exists(bool throwExcept = false)
+// {
+//     std::fstream infile(getFilename().c_str(), std::ios::in);
+//     if(infile.is_open())
+//         if(throwExcept) throw FileNotFoundError();
+//         else return false;
+//     return true;
+// }
 
 Account::~Account()
 {

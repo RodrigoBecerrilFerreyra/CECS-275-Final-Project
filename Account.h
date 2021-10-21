@@ -124,7 +124,7 @@ class Account
          * @throws FileNotFoundError if the file does not exist and if
          * throwExcept is true.
          */
-        bool exists(bool = false);
+        //bool exists(bool = false);
 
 // *****************************************************************************
 // setter and getter functions
