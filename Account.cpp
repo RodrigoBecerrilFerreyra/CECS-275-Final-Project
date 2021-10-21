@@ -85,11 +85,7 @@ void Account::save()
     std::fstream outfile(getFilename().c_str(), std::ios::out);
 
     // populate file
-    outfile << "Account Number: " << accountNumber << "\n";
-    outfile << "Current balance: $" << balance << "\n";
-    outfile << "Game played: " << gamesPlayed << "\n";
-    outfile << "Total amount won: $" << amountWon << "\n";
-    outfile << "Total amount lost: $" << amountLost << "\n";
+    outfile << *this << "\n";
 
     outfile.close();
 }
