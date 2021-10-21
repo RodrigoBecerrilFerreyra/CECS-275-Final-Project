@@ -10,10 +10,19 @@
 #include <fstream>
 #include "Account.h"
 
-Account::NumOutOfBounds::NumOutOfBounds(int lower, int upper)
+
+Account::NumOutOfBounds::NumOutOfBounds(int errval, int lower, int upper)
 {
+    errorvalue = errval;
     lowerbounds = lower;
     upperbounds = upper;
+}
+
+std::string Account::NumOutOfBounds::getErrorMessage()
+{
+    return "NumOutOfBounds; Value received: " + std::to_string(errorvalue)
+      + "; expected value between " + std::to_string(lowerbounds)
+      + " and " + std::to_string(upperbounds) + " (inclusive).";
 }
 
 Account::Account() : Account(10000000, 0){}
@@ -22,7 +31,7 @@ Account::Account(int accountNumber, int balance)
 {
     // account number must be a positive eight-digit number
     if(accountNumber < 10000000 || accountNumber > 99999999)
-        throw NumOutOfBounds(10000000, 99999999);
+        throw NumOutOfBounds(accountNumber, 10000000, 99999999);
     
     // balance must be non-negative
     if(balance < 0)
