@@ -11,6 +11,7 @@
 
 #include <exception>
 #include <fstream>
+#include <ostream>
 
 /**
  * The Account class handles subjects such as account number and records
@@ -141,6 +142,13 @@ class Account
          * throwExcept is true.
          */
         //bool exists(bool = false);
+
+        /**
+         * Stream extraction operator overload. Extracts the contents of the
+         * object (in the same format as the file) and feeds it into the
+         * std::ostream operator used to call it. Can be chained.
+         */
+        friend std::ostream& operator<< (std::ostream& os, const Account& acc);
 
 // *****************************************************************************
 // setter and getter functions

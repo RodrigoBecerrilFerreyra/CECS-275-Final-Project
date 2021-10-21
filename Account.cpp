@@ -8,6 +8,7 @@
 
 #include <string>
 #include <fstream>
+#include <ostream>
 #include "Account.h"
 
 
@@ -121,4 +122,14 @@ std::string Account::getFilename()
     filename += std::to_string(accountNumber);
     filename += ".txt";
     return filename;
+}
+
+std::ostream& operator<< (std::ostream& os, const Account& acc)
+{
+    os << "Account Number: " << acc.accountNumber << "\n";
+    os << "Current Balance: $" << acc.balance << "\n";
+    os << "Game Played: " << acc.gamesPlayed << "\n";
+    os << "Total Amount Won: $" << acc.amountWon << "\n";
+    os << "Total Amount Lost: $" << acc.amountLost;
+    return os;
 }
