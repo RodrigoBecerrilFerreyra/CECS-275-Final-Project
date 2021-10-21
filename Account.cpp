@@ -49,6 +49,10 @@ Account::Account(int accountNumber, int balance)
     
     this->accountNumber = accountNumber;
     this->balance = balance;
+    this->gamesPlayed = 0;
+    this->amountWon = 0;
+    this->amountLost = 0;
+    save();
 }
 
 void Account::load()
