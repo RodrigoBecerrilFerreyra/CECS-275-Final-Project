@@ -29,6 +29,28 @@ class CardList
         };
         Card* headPtr;
 
+        unsigned int numCards;
+
+        /**
+         * Adds an existing card to the front of the list. This function does
+         * not create a new card. THIS FUNCTION DOES NOT CHECK FOR THE EXISTENCE
+         * OF A Card OBJECT THAT IS POINTED TO BY cardPtr!!!
+         * This is very important, because many things can go
+         * wrong if a random pointer is put into this function.
+         * However, if cardPtr is nullptr, nothing is put onto the list.
+         * @param cardPtr The pointer to the Card object to add to the list.
+         */
+        void addCard(Card* cardPtr);
+
+        /**
+         * Removes the Card at the top of the list and returns a pointer to it.
+         * Note that this function does not destroy the Card nor free the memory
+         * taken by it.
+         * @return The pointer to the first Card in the list. If the list is
+         * empty, return nullptr.
+         */
+        Card* pop();
+
     public:
         /**
          * The constructor simply initializes an empty list.
@@ -52,41 +74,29 @@ class CardList
         bool createCard(enum listOfSuits cardSuit, unsigned int cardValue);
 
         /**
-         * Adds an existing card to the front of the list. This function does
-         * not create a new card. THIS FUNCTION DOES NOT CHECK FOR THE EXISTENCE
-         * OF A Card OBJECT THAT IS POINTED TO BY cardPtr!!!
-         * This is very important, because many things can go
-         * wrong if a random pointer is put into this function.
-         * However, if cardPtr is nullptr, nothing is put onto the list.
-         * @param cardPtr The pointer to the Card object to add to the list.
+         * Transfers cards in the card list to another card list. This
+         * function simply removes the desired amount of cards in the list that
+         * calls this function and transfers them to other. No new cards
+         * are created.
+         * @param other The list to transfer all cards to.
+         * @param amount The number of cards to transfer.
+         * @return True if the transfer was successful, false if it was not
+         * successful (for example, if there were no cards to transfer to
+         * begin with).
          */
-        void addCard(Card* cardPtr);
-
-        /**
-         * Searches the list, removes the Card that matches the parameters
-         * provided, and returns the pointer to the object. Note that this
-         * function does not destroy the Card nor free the memory taken by it.
-         * @param cardSuit The suit of the card (CLUBS, DIAMONDS, HEARTS, or
-         * SPADES).
-         * @param cardValue The value of the card (between 1 and 13 inclusive).
-         * @return The pointer to the Card (if found). If the requested Card was
-         * not found, returns nullptr instead.
-         */
-        Card* pop(enum listOfSuits cardSuit, unsigned int cardValue);
-
-        /**
-         * Removes the Card at the top of the list and returns a pointer to it.
-         * Note that this function does not destroy the Card nor free the memory
-         * taken by it.
-         * @return The pointer to the first Card in the list. If the list is
-         * empty, return nullptr.
-         */
-        Card* pop();
+        bool transfer(CardList &other, unsigned int amount);
 
         /**
          * Shuffles the list in place.
          */
         void shuffle();
+
+        /**
+         * Getter function for numCards.
+         * @return The length of the list; the amount of cards currently
+         * held by the list.
+         */
+        unsigned int size() const {return numCards;}
 };
 
 #endif//CARDLIST_H
