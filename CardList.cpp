@@ -11,26 +11,6 @@
 #include <chrono>    // for std::chrono
 #include "CardList.h"
 
-bool CardList::createCard(enum listOfSuits cardSuit, unsigned int cardValue)
-{
-    // the function does not do anything if the value is out of range
-    if(cardValue > 13 || cardValue < 1)
-        return false;
-    
-    // create new Card
-    Card* newCard = new Card;
-    newCard->suit = cardSuit;
-    newCard->value = cardValue;
-    newCard->nextCard = headPtr;
-    
-    // point headPtr to new Card
-    headPtr = newCard;
-
-    ++numCards;
-
-    return true;
-}
-
 CardList::Card* CardList::pop()
 {
     // do nothing if list is empty
@@ -75,7 +55,11 @@ bool CardList::transfer(CardList &other, unsigned int amount)
 
 bool CardList::createCard(enum listOfSuits cardSuit, unsigned int cardValue)
 {
-    // first, look through the list and see if any cards match requested card
+    // the function does not do anything if the value is out of range
+    if(cardValue > 13 || cardValue < 1)
+        return false;
+
+    // next, look through the list and see if any cards match requested card
     Card* traversePtr = headPtr;
     while(!traversePtr) // iterate until end of list
     {
