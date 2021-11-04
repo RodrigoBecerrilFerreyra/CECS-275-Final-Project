@@ -29,7 +29,11 @@ int main()
     std::cout << "The deck contains " << deck.size() << " cards.\n";
     // above should output 52
 
+    // print cards before shuffling
+    std::cout << deck << "\n";
     deck.shuffle();
+    // print cards after shuffling
+    std::cout << deck << "\n";
 
     // deal two cards to the hand
     deck.transfer(hand, 2);
