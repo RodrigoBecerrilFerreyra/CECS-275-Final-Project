@@ -40,5 +40,14 @@ int main()
     std::cout << "The deck contains " << deck.size() << " cards.\n";
     std::cout << "The hand contains " << hand.size() << " cards.\n";
 
+    // test output
+    std::cout << hand.outputPretty() << "\n";
+    // deal 10 more cards to hand
+    deck.transfer(hand, 10);
+    // test >10 card output
+    std::cout << hand.outputPretty() << "\n";
+    // compare to known list contents
+    std::cout << hand << "\n";
+
     return 0;
 }
