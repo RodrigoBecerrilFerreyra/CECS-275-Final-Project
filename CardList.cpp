@@ -118,46 +118,50 @@ void CardList::shuffle()
 
 std::string CardList::outputBasic() const
 {
-    std::string outstring = "SUIT       VALUE\n";
+    std::string outstring = "VALUE | SUIT\n------|---------\n";
 
     // traverse through the list and add data to the string
     Card* traversePtr = headPtr;
     while(traversePtr) // while not nullptr
     {
-        // pick the suit
-        switch(traversePtr->suit)
-        {
-            case CardList::CLUBS:
-                outstring += "CLUBS      ";
-                break;
-            case CardList::DIAMONDS:
-                outstring += "DIAMONDS   ";
-                break;
-            case CardList::HEARTS:
-                outstring += "HEARTS     ";
-                break;
-            case CardList::SPADES:
-                outstring += "SPADES     ";
-        }
-
         // pick the value
         switch(traversePtr->value)
         {
             case 1: // ace
-                outstring += "A";
+                outstring += "A    ";
                 break;
             case 11: // j
-                outstring += "J";
+                outstring += "J    ";
                 break;
             case 12: // q
-                outstring += "Q";
+                outstring += "Q    ";
                 break;
             case 13: // k
-                outstring += "K";
+                outstring += "K    ";
+                break;
+            case 10:
+                outstring += "10   ";
                 break;
             default: // anything else in between
-                outstring += std::to_string(traversePtr->value);
+                outstring += std::to_string(traversePtr->value) + "    ";
                 break;
+        }
+        outstring += " | ";
+
+        // pick the suit
+        switch(traversePtr->suit)
+        {
+            case CardList::CLUBS:
+                outstring += "CLUBS";
+                break;
+            case CardList::DIAMONDS:
+                outstring += "DIAMONDS";
+                break;
+            case CardList::HEARTS:
+                outstring += "HEARTS";
+                break;
+            case CardList::SPADES:
+                outstring += "SPADES";
         }
 
         outstring += "\n";
@@ -389,7 +393,7 @@ std::string CardList::outputBlackjack() const
                 outstring += "|    Q| ";
                 break;
             case 11: // J
-                outstring += "|J   J| ";
+                outstring += "|    J| ";
                 break;
             case 10: // 10 has two digits so it needs a special case
                 outstring += "|   10| ";
