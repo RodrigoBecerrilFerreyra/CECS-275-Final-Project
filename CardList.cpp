@@ -10,6 +10,7 @@
 #include <random>    // for std::default_random_engine
 #include <chrono>    // for std::chrono
 #include <string>    // for std::string
+#include <ostream>   // for std::ostream
 #include "CardList.h"
 
 CardList::Card* CardList::pop()
@@ -164,6 +165,12 @@ std::string CardList::outputBasic() const
     }
 
     return outstring;
+}
+
+std::ostream& operator<< (std::ostream& os, const CardList &list)
+{
+    os << list.outputBasic();
+    return os;
 }
 
 CardList::~CardList()

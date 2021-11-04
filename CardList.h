@@ -10,6 +10,7 @@
 #define CARDLIST_H
 
 #include <string>
+#include <ostream>
 
 /**
  * CardList is a singly-linked list class that can store all of the cards in a
@@ -99,6 +100,14 @@ class CardList
          * @return A formatted std::string.
          */
         std::string outputBasic() const;
+
+        /**
+         * Stream extraction operator overload that calls CardList::outputBasic
+         * and displays the same information.
+         * @return The same std::ostream operator that was used to call
+         * the function.
+         */
+        friend std::ostream& operator<<(std::ostream& os, const CardList &list);
 
         /**
          * Getter function for numCards.
