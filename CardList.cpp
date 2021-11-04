@@ -18,7 +18,7 @@ CardList::Card* CardList::pop()
     // do nothing if list is empty
     if(!headPtr)
         return nullptr;
-    
+
     // else pop the head and return it
     Card* oldhead = headPtr;
     headPtr = headPtr->nextCard;
@@ -37,7 +37,7 @@ bool CardList::transfer(CardList &other, unsigned int amount)
 {
     if(!headPtr)
         return false;
-    
+
     Card* cardBeingTransferred = nullptr;
 
     // do not remove more cards than there are in the CardList
@@ -76,7 +76,7 @@ bool CardList::createCard(CardList::listOfSuits cardSuit, unsigned int cardValue
     traversePtr->suit = cardSuit;
     traversePtr->value = cardValue;
     addCard(traversePtr);
-    
+
     return true;
 }
 
@@ -179,9 +179,10 @@ std::string CardList::outputPretty(unsigned int amount) const
     int oldAmount, i;
     std::string outstring;
     Card* traversePtr = headPtr;
-    Card* oldPtr;
+    Card* oldPtr = nullptr;
 
     // loop until there are no more cards to print
+    // Note that this is skipped if there are no Cards in the list.
     while(amount > 0)
     {
         oldAmount = amount;
@@ -226,7 +227,7 @@ std::string CardList::outputPretty(unsigned int amount) const
             traversePtr = traversePtr->nextCard;
         }
         outstring += "\n";
-        
+
         // empty line
         amount = oldAmount;
         for(i = 0; i < 10 && amount > 0; ++i)
@@ -315,7 +316,95 @@ std::string CardList::outputPretty(unsigned int amount) const
             outstring += "------- ";
             --amount;
         }
-        outstring += "\n";        
+        outstring += "\n";
+    }
+
+    return outstring;
+}
+
+std::string CardList::outputBlackjack() const
+{
+    std::string outstring;
+    // if the list is not empty
+    if(headPtr)
+    {
+        // print top of card
+        outstring += "------- -------\n";
+
+        // print value
+        switch(headPtr->value)
+        {
+            case 13: // K
+                outstring += "|K    | ";
+                break;
+            case 12: // Q
+                outstring += "|Q    | ";
+                break;
+            case 11: // J
+                outstring += "|J    | ";
+                break;
+            case 10: // 10 has two digits so it needs a special case
+                outstring += "|10   | ";
+                break;
+            case 1: // A
+                outstring += "|A    | ";
+                break;
+            default:
+                outstring += "|" + std::to_string(headPtr->value) +"    | ";
+                break;
+        }
+        outstring += "|     |\n";
+
+        // print empty line
+        outstring += "|     | |     |\n";
+
+        // print suit
+        switch(headPtr->suit)
+        {
+            case CardList::CLUBS:
+                outstring += "|CLUBS| ";
+                break;
+            case CardList::DIAMONDS:
+                outstring += "|DIAMD| ";
+                break;
+            case CardList::HEARTS:
+                outstring += "|HEART| ";
+                break;
+            case CardList::SPADES:
+                outstring += "|SPADE| ";
+                break;
+        }
+        outstring += "|     |\n";
+
+        // print empty line
+        outstring += "|     | |     |\n";
+
+        // print value
+        switch(headPtr->value)
+        {
+            case 13: // K
+                outstring += "|    K| ";
+                break;
+            case 12: // Q
+                outstring += "|    Q| ";
+                break;
+            case 11: // J
+                outstring += "|J   J| ";
+                break;
+            case 10: // 10 has two digits so it needs a special case
+                outstring += "|   10| ";
+                break;
+            case 1: // A
+                outstring += "|    A| ";
+                break;
+            default:
+                outstring += "|    " + std::to_string(headPtr->value) +"| ";
+                break;
+        }
+        outstring += "|     |\n";
+
+        // print bottom of card
+        outstring += "------- -------\n";
     }
 
     return outstring;

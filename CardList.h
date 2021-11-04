@@ -105,7 +105,9 @@ class CardList
          * Creates and returns a string that is nicely formatted to show the
          * cards in the list. Each card will be 7x5 characters in size. Only
          * 10 cards will be able to be printed onto one line; any further cards
-         * will be printed on more lines.
+         * will be printed on more lines. Note that if the amount parameter
+         * is not greater than 0 or the list is empty, the function will return
+         * an empty string.
          * @param amount The amount of cards to print out.
          * @return A formatted std::string.
          */
@@ -118,6 +120,15 @@ class CardList
          * @return A formatted std::string/
          */
         std::string outputPretty() const {return outputPretty(numCards);}
+
+        /**
+         * Outputs the first card in the list along with a blank card. This
+         * function can be used in order to begin a game of Blackjack, which
+         * displays one of the dealer's cards and hides the second.
+         * @return A formatted std::string. If the list holds no cards,
+         * the function returns an empty string.
+         */
+        std::string outputBlackjack() const;
 
         /**
          * Stream extraction operator overload that calls CardList::outputBasic
