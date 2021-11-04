@@ -9,6 +9,8 @@
 #ifndef CARDLIST_H
 #define CARDLIST_H
 
+#include <string>
+
 /**
  * CardList is a singly-linked list class that can store all of the cards in a
  * standard French 52-card deck. It implements several functions including
@@ -90,6 +92,13 @@ class CardList
          * Shuffles the list in place.
          */
         void shuffle();
+
+        /**
+         * Creates and returns a string that has the basic information of
+         * all Cards in the List.
+         * @return A formatted std::string.
+         */
+        std::string outputBasic() const;
 
         /**
          * Getter function for numCards.

@@ -9,6 +9,7 @@
 #include <algorithm> // for std::shuffle
 #include <random>    // for std::default_random_engine
 #include <chrono>    // for std::chrono
+#include <string>    // for std::string
 #include "CardList.h"
 
 CardList::Card* CardList::pop()
@@ -112,6 +113,57 @@ void CardList::shuffle()
 
     // free array memory
     delete[] addressArray;
+}
+
+std::string CardList::outputBasic() const
+{
+    std::string outstring = "SUIT       VALUE\n";
+
+    // traverse through the list and add data to the string
+    Card* traversePtr = headPtr;
+    while(traversePtr) // while not nullptr
+    {
+        // pick the suit
+        switch(traversePtr->suit)
+        {
+            case CardList::CLUBS:
+                outstring += "CLUBS      ";
+                break;
+            case CardList::DIAMONDS:
+                outstring += "DIAMONDS   ";
+                break;
+            case CardList::HEARTS:
+                outstring += "HEARTS     ";
+                break;
+            case CardList::SPADES:
+                outstring += "SPADES     ";
+        }
+
+        // pick the value
+        switch(traversePtr->value)
+        {
+            case 1: // ace
+                outstring += "A";
+                break;
+            case 11: // j
+                outstring += "J";
+                break;
+            case 12: // q
+                outstring += "Q";
+                break;
+            case 13: // k
+                outstring += "K";
+                break;
+            default: // anything else in between
+                outstring += std::to_string(traversePtr->value);
+                break;
+        }
+
+        outstring += "\n";
+        traversePtr = traversePtr->nextCard;
+    }
+
+    return outstring;
 }
 
 CardList::~CardList()
