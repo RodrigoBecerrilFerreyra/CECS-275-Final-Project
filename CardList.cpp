@@ -42,7 +42,7 @@ bool CardList::transfer(CardList &other, unsigned int amount)
     if(amount > numCards) amount = numCards;
 
     // this loop transfers the number of cards requested
-    for(int i = 0; i < numCards; ++i)
+    for(int i = 0; i < amount; ++i)
     {
         cardBeingTransferred = pop();
         if(!cardBeingTransferred) // if the list is empty for any reason
@@ -61,7 +61,7 @@ bool CardList::createCard(CardList::listOfSuits cardSuit, unsigned int cardValue
 
     // next, look through the list and see if any cards match requested card
     Card* traversePtr = headPtr;
-    while(!traversePtr) // iterate until end of list
+    while(traversePtr) // iterate until end of list
     {
         // if there is a match, return false
         if(traversePtr->suit == cardSuit && traversePtr->value == cardValue)
@@ -89,7 +89,7 @@ void CardList::shuffle()
     Card** addressArray = new Card*[numCards];
 
     // start at head; loop until you reach the end of the list; go to next card
-    for(Card* nodePtr = headPtr; !nodePtr; nodePtr = nodePtr->nextCard)
+    for(Card* nodePtr = headPtr; nodePtr; nodePtr = nodePtr->nextCard)
         addressArray[i++] = nodePtr;
         // note that the array avoids putting nullptr into the array
 
@@ -120,7 +120,7 @@ CardList::~CardList()
     Card* nextPtr = nullptr;
 
     // loop until currPtr is at the end of the list
-    while(!currPtr)
+    while(currPtr)
     {
         nextPtr = currPtr->nextCard;
         delete currPtr; --numCards;
