@@ -36,14 +36,14 @@ int main()
     std::cout << deck << "\n";
 
     // deal two cards to the hand
-    deck.transfer(hand, 2);
+    deck.transferTo(hand, 2);
     std::cout << "The deck contains " << deck.size() << " cards.\n";
     std::cout << "The hand contains " << hand.size() << " cards.\n";
 
     // test output
     std::cout << hand.outputPretty() << "\n";
     // deal 10 more cards to hand
-    deck.transfer(hand, 10);
+    deck.transferTo(hand, 10);
     // test >10 card output
     std::cout << hand.outputPretty() << "\n";
     // compare to known list contents

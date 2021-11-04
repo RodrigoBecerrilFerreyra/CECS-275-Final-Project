@@ -87,7 +87,7 @@ class CardList
          * successful (for example, if there were no cards to transfer to
          * begin with).
          */
-        bool transfer(CardList &other, unsigned int amount);
+        bool transferTo(CardList &other, unsigned int amount);
 
         /**
          * Shuffles the list in place.

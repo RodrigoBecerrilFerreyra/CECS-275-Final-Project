@@ -9,9 +9,13 @@
 #include <algorithm> // for std::shuffle
 #include <random>    // for std::default_random_engine
 #include <chrono>    // for std::chrono
-#include <string>    // for std::string
+#include <string>    // for std::string and std::to_string
 #include <ostream>   // for std::ostream
 #include "CardList.h"
+
+// *****************************************************************************
+// node functions
+// *****************************************************************************
 
 CardList::Card* CardList::pop()
 {
@@ -33,7 +37,7 @@ void CardList::addCard(Card* cardPtr)
     ++numCards;
 }
 
-bool CardList::transfer(CardList &other, unsigned int amount)
+bool CardList::transferTo(CardList &other, unsigned int amount)
 {
     if(!headPtr)
         return false;
@@ -55,7 +59,7 @@ bool CardList::transfer(CardList &other, unsigned int amount)
     return true;
 }
 
-bool CardList::createCard(CardList::listOfSuits cardSuit, unsigned int cardValue)
+bool CardList::createCard(CardList::listOfSuits cardSuit,unsigned int cardValue)
 {
     // the function does not do anything if the value is out of range
     if(cardValue > 13 || cardValue < 1)
@@ -80,41 +84,24 @@ bool CardList::createCard(CardList::listOfSuits cardSuit, unsigned int cardValue
     return true;
 }
 
-void CardList::shuffle()
+CardList::~CardList()
 {
-    // if list is empty, do nothing
-    if(!headPtr)
-        return;
+    Card* currPtr = headPtr;
+    Card* nextPtr = nullptr;
 
-    // create an array of all the addresses of all nodes in the list
-    int i = 0;
-    Card** addressArray = new Card*[numCards];
-
-    // start at head; loop until you reach the end of the list; go to next card
-    for(Card* nodePtr = headPtr; nodePtr; nodePtr = nodePtr->nextCard)
-        addressArray[i++] = nodePtr;
-        // note that the array avoids putting nullptr into the array
-
-    // shuffle the array of addresses
-    // shuffle implementation taken from https://stackoverflow.com/a/26682712
-    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-    std::default_random_engine rng(seed);
-    std::shuffle(&addressArray[0], &addressArray[numCards], rng);
-    // std::shuffle takes the address of the first element and the address of
-    //   the element after the last element. The last element is
-    //   addressArray[numCards-1], so the element after it is
-    //   addressArray[numCards].
-
-    // re-link all nodes according to the new order of addressArray
-    // start from the back and work your way up to the front
-    addressArray[numCards-1]->nextCard = nullptr;
-    for(i = numCards - 2; i >= 0; --i)
-        addressArray[i]->nextCard = addressArray[i+1];
-    headPtr = addressArray[0];
-
-    // free array memory
-    delete[] addressArray;
+    // loop until currPtr is at the end of the list
+    while(currPtr)
+    {
+        nextPtr = currPtr->nextCard;
+        delete currPtr; --numCards;
+        currPtr = nextPtr;
+    }
+    headPtr = nullptr;
 }
+
+// *****************************************************************************
+// display functions
+// *****************************************************************************
 
 std::string CardList::outputBasic() const
 {
@@ -420,17 +407,42 @@ std::ostream& operator<< (std::ostream& os, const CardList &list)
     return os;
 }
 
-CardList::~CardList()
-{
-    Card* currPtr = headPtr;
-    Card* nextPtr = nullptr;
+// *****************************************************************************
+// misc functions
+// *****************************************************************************
 
-    // loop until currPtr is at the end of the list
-    while(currPtr)
-    {
-        nextPtr = currPtr->nextCard;
-        delete currPtr; --numCards;
-        currPtr = nextPtr;
-    }
-    headPtr = nullptr;
+void CardList::shuffle()
+{
+    // if list is empty, do nothing
+    if(!headPtr)
+        return;
+
+    // create an array of all the addresses of all nodes in the list
+    int i = 0;
+    Card** addressArray = new Card*[numCards];
+
+    // start at head; loop until you reach the end of the list; go to next card
+    for(Card* nodePtr = headPtr; nodePtr; nodePtr = nodePtr->nextCard)
+        addressArray[i++] = nodePtr;
+        // note that the array avoids putting nullptr into the array
+
+    // shuffle the array of addresses
+    // shuffle implementation taken from https://stackoverflow.com/a/26682712
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::default_random_engine rng(seed);
+    std::shuffle(&addressArray[0], &addressArray[numCards], rng);
+    // std::shuffle takes the address of the first element and the address of
+    //   the element after the last element. The last element is
+    //   addressArray[numCards-1], so the element after it is
+    //   addressArray[numCards].
+
+    // re-link all nodes according to the new order of addressArray
+    // start from the back and work your way up to the front
+    addressArray[numCards-1]->nextCard = nullptr;
+    for(i = numCards - 2; i >= 0; --i)
+        addressArray[i]->nextCard = addressArray[i+1];
+    headPtr = addressArray[0];
+
+    // free array memory
+    delete[] addressArray;
 }
