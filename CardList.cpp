@@ -53,7 +53,7 @@ bool CardList::transfer(CardList &other, unsigned int amount)
     return true;
 }
 
-bool CardList::createCard(enum listOfSuits cardSuit, unsigned int cardValue)
+bool CardList::createCard(CardList::listOfSuits cardSuit, unsigned int cardValue)
 {
     // the function does not do anything if the value is out of range
     if(cardValue > 13 || cardValue < 1)
