@@ -102,6 +102,24 @@ class CardList
         std::string outputBasic() const;
 
         /**
+         * Creates and returns a string that is nicely formatted to show the
+         * cards in the list. Each card will be 7x5 characters in size. Only
+         * 10 cards will be able to be printed onto one line; any further cards
+         * will be printed on more lines.
+         * @param amount The amount of cards to print out.
+         * @return A formatted std::string.
+         */
+        std::string outputPretty(unsigned int amount) const;
+
+        /**
+         * This overloaded function prints out all cards in the list nicely
+         * according to the specifications of
+         * CardList::outputPretty(unsigned int).
+         * @return A formatted std::string/
+         */
+        std::string outputPretty() const {return outputPretty(numCards);}
+
+        /**
          * Stream extraction operator overload that calls CardList::outputBasic
          * and displays the same information.
          * @return The same std::ostream operator that was used to call

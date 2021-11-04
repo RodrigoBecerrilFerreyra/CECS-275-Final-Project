@@ -167,6 +167,160 @@ std::string CardList::outputBasic() const
     return outstring;
 }
 
+std::string CardList::outputPretty(unsigned int amount) const
+{
+    // The way this works is that the function must print one line at a time.
+    // Each piece is one line. The function makes sure to only print 10
+    // cards at a time, then moves to the next line of cards.
+
+    // do not print more cards than there are
+    if(amount > numCards) amount = numCards;
+
+    int oldAmount, i;
+    std::string outstring;
+    Card* traversePtr = headPtr;
+    Card* oldPtr;
+
+    // loop until there are no more cards to print
+    while(amount > 0)
+    {
+        oldAmount = amount;
+        oldPtr = traversePtr;
+        // print the top lines
+        // run 10 times (the amount of cards that fit on one line) or
+        // until the amount of cards is reached
+        for(i = 0; i < 10 && amount > 0; ++i)
+        {
+            outstring += "------- ";
+            --amount;
+        }
+        outstring += "\n";
+
+        // print the first line with the value
+        amount = oldAmount;
+        for(i = 0; i < 10 && amount > 0; ++i)
+        {
+            outstring += "|";
+            switch(traversePtr->value)
+            {
+                case 13: // K
+                    outstring += "K    ";
+                    break;
+                case 12: // Q
+                    outstring += "Q    ";
+                    break;
+                case 11: // J
+                    outstring += "J    ";
+                    break;
+                case 10: // 10 needs a special case because it's 2 digits long
+                    outstring += "10   ";
+                    break;
+                case 1: // A
+                    outstring += "A    ";
+                    break;
+                default:
+                    outstring += std::to_string(traversePtr->value) + "    ";
+            }
+            outstring += "| ";
+            --amount;
+            traversePtr = traversePtr->nextCard;
+        }
+        outstring += "\n";
+        
+        // empty line
+        amount = oldAmount;
+        for(i = 0; i < 10 && amount > 0; ++i)
+        {
+            outstring += "|     | ";
+            --amount;
+        }
+        outstring += "\n";
+
+        // print suit info
+        amount = oldAmount;
+        traversePtr = oldPtr;
+        for(i = 0; i < 10 && amount > 0; ++i)
+        {
+            outstring += "|";
+
+            switch(traversePtr->suit)
+            {
+                case CardList::CLUBS:
+                    outstring += "CLUBS";
+                    break;
+                case CardList::DIAMONDS:
+                    outstring += "DIAMD";
+                    break;
+                case CardList::HEARTS:
+                    outstring += "HEART";
+                    break;
+                case CardList::SPADES:
+                    outstring += "SPADE";
+                    break;
+            }
+
+            traversePtr = traversePtr->nextCard;
+            --amount;
+            outstring += "| ";
+        }
+        outstring += "\n";
+
+        // empty line
+        amount = oldAmount;
+        for(i = 0; i < 10 && amount > 0; ++i)
+        {
+            outstring += "|     | ";
+            --amount;
+        }
+        outstring += "\n";
+
+        // print value info again
+        amount = oldAmount;
+        traversePtr = oldPtr;
+        for(i = 0; i < 10 && amount > 0; ++i)
+        {
+            outstring += "|";
+
+            switch(traversePtr->value)
+            {
+                case 13: // K
+                    outstring += "    K";
+                    break;
+                case 12: // Q
+                    outstring += "    Q";
+                    break;
+                case 11: // J
+                    outstring += "    J";
+                    break;
+                case 10: // 10 needs a special case because it's 2 digits long
+                    outstring += "   10";
+                    break;
+                case 1: // A
+                    outstring += "    A";
+                    break;
+                default:
+                    outstring += "    " + std::to_string(traversePtr->value);
+                    break;
+            }
+
+            traversePtr = traversePtr->nextCard;
+            --amount;
+            outstring += "| ";
+        }
+        outstring += "\n";
+
+        amount = oldAmount;
+        for(i = 0; i < 10 && amount > 0; ++i)
+        {
+            outstring += "------- ";
+            --amount;
+        }
+        outstring += "\n";        
+    }
+
+    return outstring;
+}
+
 std::ostream& operator<< (std::ostream& os, const CardList &list)
 {
     os << list.outputBasic();
