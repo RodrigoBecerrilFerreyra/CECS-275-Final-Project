@@ -49,5 +49,8 @@ int main()
     // compare to known list contents
     std::cout << hand << "\n";
 
+    // test dealer functionality
+    std::cout << hand.outputBlackjack();
+
     return 0;
 }
