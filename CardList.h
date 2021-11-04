@@ -55,7 +55,7 @@ class CardList
         /**
          * The constructor simply initializes an empty list.
          */
-        CardList() {headPtr = nullptr;}
+        CardList() {headPtr = nullptr; numCards = 0;}
 
         /**
          * The destructor deletes all cards in the list and frees all memory.
