@@ -112,7 +112,7 @@ CardList& CardList::operator= (const CardList &copyFromMe)
         // if prevPtr != null then link the previous card to the new card
         if(prevPtr)
             prevPtr->nextCard = currPtr;
-        
+
         // make sure we can link this card to the next card on the
         // next iteration
         prevPtr = currPtr;
