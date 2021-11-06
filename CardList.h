@@ -66,6 +66,11 @@ class CardList
         ~CardList();
 
         /**
+         * Deletes all cards that are inside the list.
+         */
+        void deleteAllCards();
+
+        /**
          * Creates a card and adds it to the front of the list. Checks if an
          * identical card exists; if so, no card is created.
          * @param cardSuit The suit of the card (CLUBS, DIAMONDS, HEARTS, or

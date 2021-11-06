@@ -86,6 +86,11 @@ bool CardList::createCard(CardList::listOfSuits cardSuit,unsigned int cardValue)
 
 CardList::~CardList()
 {
+    deleteAllCards();
+}
+
+void CardList::deleteAllCards()
+{
     Card* currPtr = headPtr;
     Card* nextPtr = nullptr;
 
