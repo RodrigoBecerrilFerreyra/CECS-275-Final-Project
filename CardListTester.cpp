@@ -11,9 +11,23 @@
 
 int main()
 {
+    std::cout << "First, test the createCard function, copy constructor, "
+        << "assignment operator, and destructor.\n";
+    CardList* smallHand1 = new CardList;
+    smallHand1->createCard(CardList::HEARTS, 12);
+    smallHand1->createCard(CardList::SPADES, 1);
+    CardList smallHand2 = *smallHand1;
+    std::cout << "smallHand1 contents:\n" << *smallHand1 << "\n";
+    // delete smallHand1 to verify that the contents of smallHand2 do not
+    // rely on it
+    delete smallHand1; smallHand1 = nullptr;
+    std::cout << "smallHand2 contents (should be the same as "
+        << "smallHand1 contents):\n" << smallHand2 << "\n";
+
     // create two card lists
     CardList hand, deck;
 
+    std::cout << "Creating a full deck of cards...\n";
     // create 52 cards and shuffle them
     for(int i = 1; i <= 13; ++i)
     {
@@ -26,31 +40,30 @@ int main()
     deck.createCard(CardList::SPADES, 1);
     // attempt to create a card with an invalid value
     deck.createCard(CardList::CLUBS, 20);
-    std::cout << "The deck contains " << deck.size() << " cards.\n";
-    // above should output 52
+    std::cout << "The deck contains " << deck.size() << " cards "
+        << "(should be 52 cards).\n";
 
-    // print cards before shuffling
-    std::cout << deck << "\n";
+    std::cout << "Here's the deck before shuffling:\n" << deck << "\n";
     deck.shuffle();
-    // print cards after shuffling
-    std::cout << deck << "\n";
+    std::cout << "Here's the deck after shuffling:\n" << deck << "\n";
 
-    // deal two cards to the hand
+    std::cout << "Dealing two cards from the deck to a player's hand:\n";
     deck.transferTo(hand, 2);
     std::cout << "The deck contains " << deck.size() << " cards.\n";
     std::cout << "The hand contains " << hand.size() << " cards.\n";
 
     // test output
-    std::cout << hand.outputPretty() << "\n";
-    // deal 10 more cards to hand
+    std::cout << "Here's the player's hand:\n" << hand.outputPretty() << "\n";
+    std::cout << "Dealing 10 more cards to the player's hand:\n";
     deck.transferTo(hand, 10);
-    // test >10 card output
+    std::cout << "Here's the player's new hand:\n";
     std::cout << hand.outputPretty() << "\n";
-    // compare to known list contents
-    std::cout << hand << "\n";
+    std::cout << "Here's the same information in a different format:\n"
+        << hand << "\n";
 
     // test dealer functionality
-    std::cout << hand.outputBlackjack();
+    std::cout << "Here's the first card in the player's hand, "
+        << "and a blank card:\n" << hand.outputBlackjack();
 
     return 0;
 }
