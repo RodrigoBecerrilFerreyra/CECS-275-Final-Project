@@ -69,6 +69,14 @@ class CardList
        CardList(const CardList &copyFromMe);
 
         /**
+         * Assignment operator overload. Deletes all Cards in the source list
+         * and creates new ones that are copies of copyFromMe.
+         * @param copyFromMe The object to copy from.
+         * @return A reference to itself.
+         */
+        CardList& operator= (const CardList &copyFromMe);
+
+        /**
          * The destructor deletes all cards in the list and frees all memory.
          */
         ~CardList();

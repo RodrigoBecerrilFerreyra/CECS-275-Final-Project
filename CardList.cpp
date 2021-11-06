@@ -86,7 +86,13 @@ bool CardList::createCard(CardList::listOfSuits cardSuit,unsigned int cardValue)
 
 CardList::CardList(const CardList &copyFromMe)
 {
-    headPtr = nullptr;
+    headPtr = nullptr; numCards = 0;
+    *this = copyFromMe;
+}
+
+CardList& CardList::operator= (const CardList &copyFromMe)
+{
+    deleteAllCards();
     const Card* otherPtr = copyFromMe.headPtr;
     Card* currPtr = nullptr, *prevPtr = nullptr;
 
@@ -114,6 +120,8 @@ CardList::CardList(const CardList &copyFromMe)
         // move to next card in other list
         otherPtr = otherPtr->nextCard;
     }
+
+    return *this;
 }
 
 CardList::~CardList()
