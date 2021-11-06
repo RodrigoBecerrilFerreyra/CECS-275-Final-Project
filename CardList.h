@@ -61,6 +61,14 @@ class CardList
         CardList() {headPtr = nullptr; numCards = 0;}
 
         /**
+         * The copy constructor traverses the list of the original object and
+         * creates new nodes that are copies of the original object's nodes.
+         * This is to avoid having two objects pointing to the same list.
+         * @param copyFromMe The object to be copied from.
+        */
+       CardList(const CardList &copyFromMe);
+
+        /**
          * The destructor deletes all cards in the list and frees all memory.
          */
         ~CardList();

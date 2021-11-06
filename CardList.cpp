@@ -84,6 +84,38 @@ bool CardList::createCard(CardList::listOfSuits cardSuit,unsigned int cardValue)
     return true;
 }
 
+CardList::CardList(const CardList &copyFromMe)
+{
+    headPtr = nullptr;
+    const Card* otherPtr = copyFromMe.headPtr;
+    Card* currPtr = nullptr, *prevPtr = nullptr;
+
+    // while otherPtr != nullptr
+    // Note that this is skipped if the other list is empty.
+    while(otherPtr)
+    {
+        // create new card and copy values
+        currPtr = new Card; ++numCards;
+        currPtr->value = otherPtr->value;
+        currPtr->suit = otherPtr->suit;
+        currPtr->nextCard = nullptr;
+
+        // if headPtr == nullptr then have currPtr be the start of the list
+        if(!headPtr)
+            headPtr = currPtr;
+        // if prevPtr != null then link the previous card to the new card
+        if(prevPtr)
+            prevPtr->nextCard = currPtr;
+        
+        // make sure we can link this card to the next card on the
+        // next iteration
+        prevPtr = currPtr;
+
+        // move to next card in other list
+        otherPtr = otherPtr->nextCard;
+    }
+}
+
 CardList::~CardList()
 {
     deleteAllCards();
