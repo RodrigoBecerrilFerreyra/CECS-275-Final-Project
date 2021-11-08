@@ -84,6 +84,36 @@ bool CardList::createCard(CardList::listOfSuits cardSuit,unsigned int cardValue)
     return true;
 }
 
+unsigned int CardList::countCards(CardList::listOfSuits suitToFind)
+{
+    unsigned int count = 0;
+    Card* traversePtr = headPtr;
+
+    // loop until traversePtr == nullptr
+    while(traversePtr)
+    {
+        if(traversePtr->suit == suitToFind)
+            ++count;
+    }
+
+    return count;
+}
+
+unsigned int CardList::countCards(unsigned int valueToFind)
+{
+    unsigned int count = 0;
+    Card* traversePtr = headPtr;
+
+    // loop until traversePtr == nullptr
+    while(traversePtr)
+    {
+        if(traversePtr->value == valueToFind)
+            ++count;
+    }
+
+    return count;
+}
+
 CardList::CardList(const CardList &copyFromMe)
 {
     headPtr = nullptr; numCards = 0;
