@@ -111,6 +111,13 @@ class CardList
         bool transferTo(CardList &other, unsigned int amount);
 
         /**
+         * Transfers all the cards in the list to the CardList other.
+         * @param other The CardList to transfer all cards to.
+         * @return True if the transfer was successful, false otherwise.
+         */
+        bool transferTo(CardList &other) {return transferTo(other, numCards);}
+
+        /**
          * Shuffles the list in place.
          */
         void shuffle();
