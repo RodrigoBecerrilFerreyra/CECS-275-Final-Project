@@ -139,6 +139,12 @@ class CardList
         unsigned int countCards(unsigned int valueToFind);
 
         /**
+         * Calculates the total value of all the cards in the list.
+         * @return The sum of the values of the cards in the list.
+         */
+        unsigned int listValue();
+
+        /**
          * Creates and returns a string that has the basic information of
          * all Cards in the List.
          * @return A formatted std::string.

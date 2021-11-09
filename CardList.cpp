@@ -114,6 +114,21 @@ unsigned int CardList::countCards(unsigned int valueToFind)
     return count;
 }
 
+unsigned int CardList::listValue()
+{
+    unsigned int total = 0;
+    Card* traversePtr = headPtr;
+
+    // loop until traversePtr == nullptr
+    while(traversePtr)
+    {
+        total += traversePtr->value;
+        traversePtr = traversePtr->nextCard;
+    }
+
+    return total;
+}
+
 CardList::CardList(const CardList &copyFromMe)
 {
     headPtr = nullptr; numCards = 0;
