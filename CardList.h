@@ -128,21 +128,21 @@ class CardList
          * @param suitToFind The suit that the function will look for.
          * @return The number of cards that match the description.
          */
-        unsigned int countCards(listOfSuits suitToFind);
+        unsigned int countCards(listOfSuits suitToFind) const;
 
-                /**
+        /**
          * Traverses through the list and counts the number of cards that match
          * the parameter given.
          * @param valueToFind The value that the function will look for.
          * @return The number of cards that match the description.
          */
-        unsigned int countCards(unsigned int valueToFind);
+        unsigned int countCards(unsigned int valueToFind) const;
 
         /**
          * Calculates the total value of all the cards in the list.
          * @return The sum of the values of the cards in the list.
          */
-        unsigned int listValue();
+        unsigned int listValue() const;
 
         /**
          * Creates and returns a string that has the basic information of

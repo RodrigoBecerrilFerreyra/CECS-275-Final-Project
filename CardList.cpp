@@ -84,7 +84,7 @@ bool CardList::createCard(CardList::listOfSuits cardSuit,unsigned int cardValue)
     return true;
 }
 
-unsigned int CardList::countCards(CardList::listOfSuits suitToFind)
+unsigned int CardList::countCards(CardList::listOfSuits suitToFind) const
 {
     unsigned int count = 0;
     Card* traversePtr = headPtr;
@@ -94,12 +94,13 @@ unsigned int CardList::countCards(CardList::listOfSuits suitToFind)
     {
         if(traversePtr->suit == suitToFind)
             ++count;
+        traversePtr = traversePtr->nextCard;
     }
 
     return count;
 }
 
-unsigned int CardList::countCards(unsigned int valueToFind)
+unsigned int CardList::countCards(unsigned int valueToFind) const
 {
     unsigned int count = 0;
     Card* traversePtr = headPtr;
@@ -109,12 +110,13 @@ unsigned int CardList::countCards(unsigned int valueToFind)
     {
         if(traversePtr->value == valueToFind)
             ++count;
+        traversePtr = traversePtr->nextCard;
     }
 
     return count;
 }
 
-unsigned int CardList::listValue()
+unsigned int CardList::listValue() const
 {
     unsigned int total = 0;
     Card* traversePtr = headPtr;
