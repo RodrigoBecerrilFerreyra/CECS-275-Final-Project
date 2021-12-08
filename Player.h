@@ -32,7 +32,7 @@ class Player
 
         /** This enum specifies the action that the user takes after
         receiving a card. */
-        enum action {HIT, HOLD, BUST};
+        enum action {HIT, STAND, SPLIT};
 
         /**
          * Has the player decide what to do in the current state of the game.
