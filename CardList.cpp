@@ -124,11 +124,12 @@ unsigned int CardList::listValue() const
     // loop until traversePtr == nullptr
     while(traversePtr)
     {
+        // Truncate Jack/Queen/King
         if (traversePtr->value > 10)
             total += 10;
         else 
             total += traversePtr->value;
-            
+
         traversePtr = traversePtr->nextCard;
     }
 
