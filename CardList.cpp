@@ -124,7 +124,11 @@ unsigned int CardList::listValue() const
     // loop until traversePtr == nullptr
     while(traversePtr)
     {
-        total += traversePtr->value;
+        if (traversePtr->value > 10)
+            total += 10;
+        else 
+            total += traversePtr->value;
+            
         traversePtr = traversePtr->nextCard;
     }
 
