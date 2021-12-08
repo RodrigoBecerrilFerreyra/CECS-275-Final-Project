@@ -41,6 +41,16 @@ class Player
          */
         action takeAction();
 
+        /**
+         * Gives the designated Player's hand the top cards from 
+         * another CardList. Updates corresponding hand value once 
+         * all cards are drawn.
+         * @param hand  Player hand to draw cards into. 
+         * @param deck  Base CardList to take cards from.
+         * @param count How many cards from the CardList to take.
+         */
+        void drawCard(CardList* hand, CardList* deck, int count);
+
     private:
         CardList* hand1, * hand2; // the hands to hold the CardLists
         int value1, value2; // the values of each hand
