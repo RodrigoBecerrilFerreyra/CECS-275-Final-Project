@@ -21,9 +21,19 @@ class Player
 {
     public:
         /**
-         * Initialization constructor to create a new Player.
+         * Initialization constructor to create a new Player. Defaults to a 
+         * "dealer"-type Player, which disables the ability to save or 
+         * load an Account.
          */
         Player();
+
+        /**
+         * Constructor specific to a "player"-type Player. Similar 
+         * implementation to default constructor but specifically 
+         * activates ability to set up Account.
+         * @param ID  Some non-zero number to allow Account access.
+         */
+        Player(int ID);
 
         /**
          * Copy constructor to copy the hands and Account of another Player.
@@ -52,8 +62,16 @@ class Player
         void drawCard(CardList* &hand, CardList* &deck, int count);
 
         /**
-         * Fetch account details. S
-         * 
+         * Returns the designated Player's hand to a larger pool.
+         * @param deck   Card pool to place Player's cards back into. 
+         * @param hand   Player's hand to remove cards from.
+         */
+        void returnCards(CardList* &deck, CardList *&hand);
+
+        /**
+         * Fetch account details IFF the Player object is a "Player" 
+         * rather than a "Dealer" as only the former needs to 
+         * have an account.
          */
         void prevAccount()
             { if (playerType) playerRef.load(); }

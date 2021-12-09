@@ -9,3 +9,16 @@
 #include "CardList.h"
 #include "Account.h"
 #include "Player.h"
+
+Player::Player()
+{
+    value1 = value2 = 0;
+    playerType = 0;
+}
+
+Player::Player(int ID)
+{
+    value1 = value2 = 0;
+    if (ID != 0) playerType = ID;
+    else playerType = 1;
+}
