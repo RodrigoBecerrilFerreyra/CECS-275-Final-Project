@@ -51,9 +51,17 @@ class Player
          */
         void drawCard(CardList* &hand, CardList* &deck, int count);
 
+        /**
+         * Fetch account details. S
+         * 
+         */
+        void prevAccount()
+            { if (playerType) playerRef.load(); }
     private:
         CardList* hand1, * hand2; // the hands to hold the CardLists
-        int value1, value2; // the values of each hand
+        int value1, value2;       // the values of each hand
+        int playerType;           // 0 for "Dealer" or 1 for "Player"
+        Account playerRef;        // Defines available balance
 };
 
 #endif//PLAYER_H
