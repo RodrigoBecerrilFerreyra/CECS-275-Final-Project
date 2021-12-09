@@ -35,6 +35,15 @@ std::string Account::FileNotFoundError::getErrorMessage()
     return "FileNotFoundError; The file " + filename + " could not be found.";
 }
 
+Account::Account()
+{
+    this->accountNumber = 0;
+    this->balance = 0;
+    this->gamesPlayed = 0;
+    this->amountWon = 0;
+    this->amountLost = 0;
+}
+
 Account::Account(int accountNumber, int balance)
 {
     // account number must be a positive eight-digit number

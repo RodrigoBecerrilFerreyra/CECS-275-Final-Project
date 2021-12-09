@@ -84,6 +84,10 @@ class Account
 // *****************************************************************************
 // constructors
 // *****************************************************************************
+        /**
+         * Default constructor.
+         */
+        Account();
 
         /**
          * This overloaded constructor allows the user to set the value for
