@@ -59,14 +59,14 @@ class Player
          * @param deck  Base CardList to take cards from.
          * @param count How many cards from the CardList to take.
          */
-        void drawCard(CardList* &hand, CardList* &deck, int count);
+        void drawCard(CardList *hand, CardList deck, int count);
 
         /**
          * Returns the designated Player's hand to a larger pool.
          * @param deck   Card pool to place Player's cards back into. 
          * @param hand   Player's hand to remove cards from.
          */
-        void returnCards(CardList* &deck, CardList *&hand);
+        void returnCards(CardList deck, CardList* hand);
 
         /**
          * Fetch account details IFF the Player object is a "Player" 
@@ -76,7 +76,7 @@ class Player
         void prevAccount()
             { if (playerType) playerRef.load(); }
     private:
-        CardList* hand1, * hand2; // the hands to hold the CardLists
+        CardList *hand1, *hand2;  // the hands to hold the CardLists
         int value1, value2;       // the values of each hand
         int playerType;           // 0 for "Dealer" or 1 for "Player"
         Account playerRef;        // Defines available balance
