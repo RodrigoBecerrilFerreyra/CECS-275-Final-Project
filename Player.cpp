@@ -10,6 +10,8 @@
 #include "Account.h"
 #include "Player.h"
 
+
+
 Player::Player()
 {
     value1 = value2 = 0;
@@ -26,21 +28,24 @@ Player::Player(int ID)
 void Player::drawCard(CardList *hand, CardList deck, int count)
 {
     int numAces = 0;
-    deck.transferTo(*hand, count);
-    if (value1) 
+    bool success = deck.transferTo(*hand, count);
+    if (success)
     {
-        // expression must have class type (i.e. CardList) but has type (CardList *)
-        value2 = hand.listValue();
-        numAces = hand.CountCards(1);
-        value2 += (numAces*10);
-        if(value2>21) value2 -= (numAces*10);
-    } 
-    else 
-    {
-        // expression must have class type (i.e. CardList) but has type (CardList *)
-        value1 = hand.listValue();
-        numAces = hand.CountCards(1);
-        value1 += (numAces*10);
-        if(value1>21) value2 -= (numAces*10);
+        if (value1) 
+        {
+            // expression must have class type (i.e. CardList) but has type [CardList *]
+            value2 = hand.listValue();
+            numAces = hand.CountCards(1);
+            value2 += (numAces*10);
+            if(value2>21) value2 -= (numAces*10);
+        } 
+        else 
+        {
+            // expression must have class type (i.e. CardList) but has type [CardList *]
+            value1 = hand.listValue();
+            numAces = hand.CountCards(1);
+            value1 += (numAces*10);
+            if(value1>21) value2 -= (numAces*10);
+        }
     }
 }
