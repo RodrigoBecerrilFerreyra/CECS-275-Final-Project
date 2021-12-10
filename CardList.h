@@ -20,7 +20,7 @@
 class CardList
 {
     public:
-        enum listOfSuits {CLUBS, DIAMONDS, HEARTS, SPADES};
+        enum listOfSuits {SPADES, CLUBS, DIAMONDS, HEARTS};
 
     private:
         struct Card
