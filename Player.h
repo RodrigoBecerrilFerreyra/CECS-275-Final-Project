@@ -21,6 +21,23 @@ class Player
 {
     public:
         /**
+         * Class for exception handling of betting more than the playerRef 
+         * Account's balance.
+         */
+        class InsufficientBalance : public std::exception
+        {
+            public:
+                InsufficientBalance(double userBet, double accBal);
+                /**
+                 * Builds an error message and returns it.
+                 * @return A detailed error message.
+                 */
+                std::string getErrorMessage();
+            private:
+                double balance;
+                double bet;
+        };
+        /**
          * Initialization constructor to create a new Player. Defaults to a 
          * "dealer"-type Player, which disables the ability to save or 
          * load an Account.
@@ -38,7 +55,7 @@ class Player
         /**
          * Copy constructor to copy the hands and Account of another Player.
          */ 
-        Player(Player &other);
+        Player(Player const &other);
 
         /** This enum specifies the action that the user takes after
         receiving a card. */
@@ -49,15 +66,14 @@ class Player
          * Should be called after receiving a card.
          * @returns The action to be taken by the Player.
          */
-        action takeAction();
+        unsigned int takeAction();
         
         /**
          * Gives the designated Player's hand the top cards from 
-         * another CardList. Updates corresponding hand value once 
-         * all cards are drawn.
+         * another CardList. 
          * @param hand  Player hand to draw cards into. 
          * @param deck  Base CardList to take cards from.
-         * @param count How many cards from the CardList to take.
+         * @param count How many cards from the target CardList to take.
          */
         void drawCard(CardList *hand, CardList deck, int count);
 
@@ -69,17 +85,31 @@ class Player
         void returnCards(CardList deck, CardList* hand);
 
         /**
+         * Wrapper function for checking the user's current balance in 
+         * their account to verify that they are making a legal bet.
+         * @return     The user's current balance of funds.
+         */
+        double checkMoney()
+            { return playerRef->getBalance(); }
+
+        /**
+         * Wrapper function to update the value of Player's hand. 
+         * @param corrVal  Flag used to differentiate which value to update.
+         */
+        void updateVal(int corrVal);
+        
+        /**
          * Fetch account details IFF the Player object is a "Player" 
          * rather than a "Dealer" as only the former needs to 
          * have an account.
          */
         void prevAccount()
-            { if (playerType) playerRef.load(); }
+            { if (playerType) playerRef->load(); }
     private:
         CardList *hand1, *hand2;  // the hands to hold the CardLists
         int value1, value2;       // the values of each hand
         int playerType;           // 0 for "Dealer" or 1 for "Player"
-        Account playerRef;        // Defines available balance
+        Account *playerRef;       // Defines Player's statistics
 };
 
 #endif//PLAYER_H
