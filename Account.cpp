@@ -113,13 +113,17 @@ Account::~Account()
 
 std::string Account::getFilename()
 {
+    // 8-digit account
     int maxNum = 8;
+    // Take the current accountNumber's length after casting to string.
     std::string tempAcc = std::to_string(accountNumber);
     int str_length = tempAcc.length();
+    // Append leading zeroes until 8 digits
     for(int i = 0; i < maxNum - str_length; i++)
     {
         tempAcc = "0" + tempAcc;
     }
+    // Generate file name
     std::string filename = "acc_";
     filename += tempAcc;
     filename += ".txt";
