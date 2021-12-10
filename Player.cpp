@@ -35,10 +35,35 @@ Player::Player()
 Player::Player(int ID)
 {
     hand1 = hand2 = nullptr;
+    playerRef = nullptr;
     value1 = value2 = 0;
-    // Sets playerType to any non-zero value
-    if (ID > 0) playerType = ID;
-    else playerType = 1;
+    // If ID is a positive value, attempt to load/save account.
+    if (ID > 0)
+    {
+        playerType = ID;
+        // Attempt to load account using ID value.
+        try
+        {
+            playerRef = new Account(ID);
+        }
+        catch(Account::FileNotFoundError &e)
+        {
+            // File did not already exist, so make a new one.
+            std::cerr << e.getErrorMessage() << "\n";
+            playerRef->save();
+        }
+        catch(Account::NumOutOfBounds &e)
+        {
+            // File input is not valid.
+            std::cerr << e.getErrorMessage() << "\n";
+        }
+    } 
+    else
+    {   
+        // Default to playerType of dealer.
+        playerType = 0;
+        playerRef = nullptr;
+    } 
 }
 
 unsigned int Player::takeAction()
