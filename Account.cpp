@@ -45,6 +45,15 @@ Account::Account()
     this->amountLost = 0;
 }
 
+Account::Account(int accountNumber)
+{
+    // account number must be a positive eight-digit number
+    if(accountNumber < 1 || accountNumber > 99999999)
+        throw NumOutOfBounds(accountNumber, 1, 99999999);
+    this->accountNumber = accountNumber;
+    load();
+}
+
 Account::Account(int accountNumber, int balance)
 {
     // account number must be a positive eight-digit number
@@ -104,6 +113,13 @@ void Account::inputGameResults(double moneyWon, double moneyLost)
     amountLost += moneyLost;
     balance += (moneyWon - moneyLost);
     save();
+}
+
+void Account::setAccountNumber(unsigned int accSet)
+{
+    if(accSet < 1 || accSet > 99999999)
+        throw NumOutOfBounds(accSet, 1, 99999999);
+    accountNumber = accSet;
 }
 
 Account::~Account()
