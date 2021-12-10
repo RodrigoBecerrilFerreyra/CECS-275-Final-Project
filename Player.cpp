@@ -62,7 +62,6 @@ Player::Player(int ID)
     {   
         // Default to playerType of dealer.
         playerType = 0;
-        playerRef = nullptr;
     } 
 }
 

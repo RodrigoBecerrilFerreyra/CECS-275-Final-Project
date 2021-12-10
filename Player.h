@@ -56,6 +56,7 @@ class Player
          * Copy constructor to copy the hands and Account of another Player.
          */ 
         Player(Player const &other);
+        // THIS HAS NOT YET BEEN IMPLEMENTED
 
         /** This enum specifies the action that the user takes after
         receiving a card. */
