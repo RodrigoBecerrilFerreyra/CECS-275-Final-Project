@@ -7,6 +7,7 @@
  */
 
 #include <string>
+#include <iomanip>
 #include <fstream>
 #include <ostream>
 #include "Account.h"
@@ -47,8 +48,8 @@ Account::Account()
 Account::Account(int accountNumber, int balance)
 {
     // account number must be a positive eight-digit number
-    if(accountNumber < 10000000 || accountNumber > 99999999)
-        throw NumOutOfBounds(accountNumber, 10000000, 99999999);
+    if(accountNumber < 1 || accountNumber > 99999999)
+        throw NumOutOfBounds(accountNumber, 1, 99999999);
     
     // balance must be non-negative
     if(balance < 0)
@@ -112,18 +113,29 @@ Account::~Account()
 
 std::string Account::getFilename()
 {
+    int maxNum = 8;
+    std::string tempAcc = std::to_string(accountNumber);
+    int str_length = tempAcc.length();
+    for(int i = 0; i < maxNum - str_length; i++)
+    {
+        tempAcc = "0" + tempAcc;
+    }
     std::string filename = "acc_";
-    filename += std::to_string(accountNumber);
+    filename += tempAcc;
     filename += ".txt";
     return filename;
 }
 
 std::ostream& operator<< (std::ostream& os, const Account& acc)
 {
-    os << "Account Number: " << acc.accountNumber << "\n";
-    os << "Current Balance: $" << acc.balance << "\n";
+    os << "Account Number: " << std::setfill('0') << std::setw(8) 
+       << acc.accountNumber << "\n";
+    os << "Current Balance: $" << std::fixed << std::setprecision(2) 
+       << acc.balance << "\n";
     os << "Game Played: " << acc.gamesPlayed << "\n";
-    os << "Total Amount Won: $" << acc.amountWon << "\n";
-    os << "Total Amount Lost: $" << acc.amountLost;
+    os << "Total Amount Won: $" << std::fixed << std::setprecision(2) 
+       << acc.amountWon << "\n";
+    os << "Total Amount Lost: $" << std::fixed << std::setprecision(2) 
+       << acc.amountLost;
     return os;
 }
