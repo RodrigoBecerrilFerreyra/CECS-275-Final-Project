@@ -20,7 +20,7 @@
 class CardList
 {
     public:
-        enum listOfSuits {CLUBS, DIAMONDS, HEARTS, SPADES};
+        enum listOfSuits {SPADES, CLUBS, DIAMONDS, HEARTS};
 
     private:
         struct Card
@@ -194,6 +194,13 @@ class CardList
          * held by the list.
          */
         unsigned int size() const {return numCards;}
+
+        /**
+         * Compares the values (not the suits) of the first two cards.
+         * @return True if the value of the first two cards are the same,
+         * false if they are different (or there are less than two cards).
+         */
+        bool compareFirstTwoCards();
 };
 
 #endif//CARDLIST_H

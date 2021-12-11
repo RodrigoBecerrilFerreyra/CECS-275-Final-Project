@@ -7,6 +7,7 @@
  */
 
 #include <string>
+#include <iomanip>
 #include <fstream>
 #include <ostream>
 #include "Account.h"
@@ -35,11 +36,29 @@ std::string Account::FileNotFoundError::getErrorMessage()
     return "FileNotFoundError; The file " + filename + " could not be found.";
 }
 
+Account::Account()
+{
+    this->accountNumber = 0;
+    this->balance = 0;
+    this->gamesPlayed = 0;
+    this->amountWon = 0;
+    this->amountLost = 0;
+}
+
+Account::Account(int accountNumber)
+{
+    // account number must be a positive eight-digit number
+    if(accountNumber < 1 || accountNumber > 99999999)
+        throw NumOutOfBounds(accountNumber, 1, 99999999);
+    this->accountNumber = accountNumber;
+    load();
+}
+
 Account::Account(int accountNumber, int balance)
 {
     // account number must be a positive eight-digit number
-    if(accountNumber < 10000000 || accountNumber > 99999999)
-        throw NumOutOfBounds(accountNumber, 10000000, 99999999);
+    if(accountNumber < 1 || accountNumber > 99999999)
+        throw NumOutOfBounds(accountNumber, 1, 99999999);
     
     // balance must be non-negative
     if(balance < 0)
@@ -96,6 +115,13 @@ void Account::inputGameResults(double moneyWon, double moneyLost)
     save();
 }
 
+void Account::setAccountNumber(unsigned int accSet)
+{
+    if(accSet < 1 || accSet > 99999999)
+        throw NumOutOfBounds(accSet, 1, 99999999);
+    accountNumber = accSet;
+}
+
 Account::~Account()
 {
     save();
@@ -103,18 +129,33 @@ Account::~Account()
 
 std::string Account::getFilename()
 {
+    // 8-digit account
+    int maxNum = 8;
+    // Take the current accountNumber's length after casting to string.
+    std::string tempAcc = std::to_string(accountNumber);
+    int str_length = tempAcc.length();
+    // Append leading zeroes until 8 digits
+    for(int i = 0; i < maxNum - str_length; i++)
+    {
+        tempAcc = "0" + tempAcc;
+    }
+    // Generate file name
     std::string filename = "acc_";
-    filename += std::to_string(accountNumber);
+    filename += tempAcc;
     filename += ".txt";
     return filename;
 }
 
 std::ostream& operator<< (std::ostream& os, const Account& acc)
 {
-    os << "Account Number: " << acc.accountNumber << "\n";
-    os << "Current Balance: $" << acc.balance << "\n";
+    os << "Account Number: " << std::setfill('0') << std::setw(8) 
+       << acc.accountNumber << "\n";
+    os << "Current Balance: $" << std::fixed << std::setprecision(2) 
+       << acc.balance << "\n";
     os << "Game Played: " << acc.gamesPlayed << "\n";
-    os << "Total Amount Won: $" << acc.amountWon << "\n";
-    os << "Total Amount Lost: $" << acc.amountLost;
+    os << "Total Amount Won: $" << std::fixed << std::setprecision(2) 
+       << acc.amountWon << "\n";
+    os << "Total Amount Lost: $" << std::fixed << std::setprecision(2) 
+       << acc.amountLost;
     return os;
 }

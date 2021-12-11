@@ -84,6 +84,20 @@ class Account
 // *****************************************************************************
 // constructors
 // *****************************************************************************
+        /**
+         * Default constructor.
+         */
+        Account();
+
+        /**
+         * This overloaded constructor allows the user to set the value for
+         * one of the class's members. Uses a known Account Number to 
+         * attempt to load value from a .txt file.
+         * @param accountNumber The account number of the new account.
+         * @throws ParameterOutOfBounds if the account number is not a
+         * positive eight-digit number.
+         */
+        Account(int accountNumber);
 
         /**
          * This overloaded constructor allows the user to set the value for
@@ -144,6 +158,15 @@ class Account
          * @param moneyLost The amount of money lost from the game.
          */
         void inputGameResults(double moneyWon, double moneyLost);
+
+        /**
+         * Attempts to set accountNumber independently of other members. 
+         * Use to update empty Account to attempt loading file.
+         * @param accSet  Attempted overwrite of accountNumber.
+         * @throws ParameterOutOfBounds if the account number is not a
+         * positive eight-digit number.
+         */
+        void setAccountNumber(unsigned int accSet);
 
         // getter functions
         /**

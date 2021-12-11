@@ -2,3 +2,4 @@
 acc_*.txt
 .vscode/
 *.exe
+*.gch
