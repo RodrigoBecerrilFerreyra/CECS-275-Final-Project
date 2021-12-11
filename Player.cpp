@@ -177,3 +177,11 @@ void Player::updateVal(int corrVal)
         }
     }
 }
+
+bool Player::split()
+{
+    if(hand1.size() != 2)
+        return false;
+    hand1.transferTo(hand2, 1);
+    return true;
+}

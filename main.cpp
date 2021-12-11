@@ -13,6 +13,7 @@
 int main()
 {
     int useroption; bool splitflag;
+    int hand1val, hand2val, dealval;
     // build deck
     CardList deck;
     // create 52 cards
@@ -51,7 +52,7 @@ int main()
         if(player.splitCondition())
         {
             std::cout << "You received two of the same card. Would you like to"
-                << " split? 1 for yes, 0 for no: ";
+                << " split? 0 for no, 1 for yes: ";
             std::cin >> useroption;
             if(useroption)
             {
@@ -61,7 +62,7 @@ int main()
         }
 
         // hand 1
-        std::cout << "Now playing: hand 1.\n";
+        std::cout << "Now playing: hand 1." << std::endl;
         player.hand1.outputPretty();
         std::cout << "Value: " << player.getValue(0) << "\n";
         while(true)
@@ -83,7 +84,7 @@ int main()
         // hand 2
         if(splitflag)
         {
-            std::cout << "Now playing: hand 2.\n";
+            std::cout << "Now playing: hand 2." << std::endl;
             player.hand2.outputPretty();
             std::cout << "Value: " << player.getValue(1) << "\n";
             while(true)
@@ -100,6 +101,61 @@ int main()
                 }
                 else // stand
                     break;
+            }
+        }
+
+        hand1val = player.getValue(0);
+        hand2val = player.getValue(1);
+        dealval  = dealer.getValue(0);
+
+        std::cout << "Dealer's hand:" << std::endl;
+        dealer.hand1.outputPretty();
+        std::cout << "Value: " << dealval << "\n";
+
+        std::cout << "Results for Game 1:\n";
+        if(hand1val > 21)
+        {
+            std::cout << "Bust! You lose.\n";
+            // lose bet
+        }
+        else if(hand1val > dealval)
+        {
+            std::cout << "You win!\n";
+            // double bet
+        }
+        else if(hand1val < dealval)
+        {
+            std::cout << "You lose.\n";
+            // lose bet
+        }
+        else // tie
+        {
+            std::cout << "It's a tie!\n";
+            // split bet
+        }
+
+        if(splitflag)
+        {
+            std::cout << "Results for Game 2:\n";
+            if(hand2val > 21)
+            {
+                std::cout << "Bust! You lose.\n";
+                // lose bet
+            }
+            else if(hand2val > dealval)
+            {
+                std::cout << "You win!\n";
+                // double bet
+            }
+            else if(hand2val < dealval)
+            {
+                std::cout << "You lose.\n";
+                // lose bet
+            }
+            else // tie
+            {
+                std::cout << "It's a tie!\n";
+                // split bet
             }
         }
 
