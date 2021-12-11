@@ -20,8 +20,8 @@ Player::InsufficientBalance::InsufficientBalance(double userBet, double accBal)
 
 std::string Player::InsufficientBalance::getErrorMessage()
 {
-    return "InsufficientBalance; Player bet" + std::to_string(bet - balance) + 
-    "over maximum possible Account balance.\n";
+    return "InsufficientBalance; Player bet " + std::to_string(bet - balance) 
+    + " over maximum possible Account balance.\n";
 }
 
 Player::NotAction::NotAction(int useAction)
