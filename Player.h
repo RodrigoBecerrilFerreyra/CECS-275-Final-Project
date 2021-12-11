@@ -10,6 +10,7 @@
 #define PLAYER_H
 
 #include <iostream>
+#include <string>
 #include "CardList.h"
 #include "Account.h"
 
@@ -156,13 +157,13 @@ class Player
         /**
          * Wrapper for CardList::outputPretty()
          * @param corrVal Flag used to differentiate between the CardLists.
+         * @return A formatted string.
          */
-        void outputPrettyWrapper(int corrVal)
+        std::string outputPrettyWrapper(int corrVal)
         {
             if(corrVal == 0)
-                hand1.outputPretty();
-            else
-                hand2.outputPretty();
+                return hand1.outputPretty();
+            return hand2.outputPretty();
         }
 
         /**
