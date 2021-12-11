@@ -92,6 +92,13 @@ class Player
          * @return         Value of the hand.
          */
         int getValue(int corrVal);
+
+        /**
+         * Getter function for player's account.
+         * @return    Account parameters.
+         */ 
+        Account getAccount()
+            { return *playerRef; }
         
         /**
          * Has the player decide what to do in the current state of the game.
