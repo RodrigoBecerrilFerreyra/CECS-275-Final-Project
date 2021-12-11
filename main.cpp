@@ -69,7 +69,7 @@ int main()
             if(useroption == 0) // hit
             {
                 player.drawCard(0, deck, 1);
-                std::cout << "value: " << player.getValue2(0) << "\n";
+                std::cout << "value: " << player.getValue(0) << "\n";
                 if(player.getValue(0) >= 21)
                     break;
             }
