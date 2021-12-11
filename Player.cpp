@@ -67,6 +67,8 @@ Player::Player(int ID)
         {
             // File input is not valid.
             std::cerr << e.getErrorMessage() << "\n";
+            std::cout << "Generating new account with truncated ID.\n";
+            playerRef = new Account(ID%99999999,1000);
         }
     } 
     else
