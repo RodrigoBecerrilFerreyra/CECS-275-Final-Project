@@ -77,6 +77,14 @@ class Player
          * @throws NumOutOfBounds if player ID not 8-digit positive integer. 
          */
         Player(int ID);
+
+// *****************************************************************************
+// destructors
+// *****************************************************************************
+        /**
+         * Deletes dynamically allocated Account pointer.
+         */
+        ~Player();
 // *****************************************************************************
 // setter and getter functions
 // *****************************************************************************

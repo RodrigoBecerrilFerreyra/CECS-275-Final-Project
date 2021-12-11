@@ -80,6 +80,12 @@ Player::Player(int ID)
     bet2 = 0;
 }
 
+Player::~Player()
+{
+  delete playerRef;
+  playerRef = nullptr;
+}
+
 void Player::setBet(double newBet)
 {
     double money = checkMoney();
