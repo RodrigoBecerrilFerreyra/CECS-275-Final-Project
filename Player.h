@@ -9,6 +9,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <iostream>
 #include "CardList.h"
 #include "Account.h"
 #include <iostream>
@@ -152,10 +153,28 @@ class Player
          */
         bool splitCondition()
             {return hand1.compareFirstTwoCards();}
+        
+        /**
+         * Wrapper for CardList::outputPretty()
+         * @param corrVal Flag used to differentiate between the CardLists.
+         */
+        void outputPrettyWrapper(int corrVal)
+        {
+            if(corrVal == 0)
+                hand1.outputPretty();
+            else
+                hand2.outputPretty();
+        }
 
-        CardList hand1, hand2;    // the hands to hold the CardLists
+        /**
+         * Removes one card from hand1 and gives it to hand2.
+         * @return True if successful, false otherwise (for example
+         * if there are more or less than two cards).
+         */
+        bool split();
 
     private:
+        CardList hand1, hand2;    // the hands to hold the CardLists
         int value1, value2;       // the values of each hand
         int playerType;           // 0 for "Dealer" or 1 for "Player"
         Account *playerRef;       // Defines Player's statistics
