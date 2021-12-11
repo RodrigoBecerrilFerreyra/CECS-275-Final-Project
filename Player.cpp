@@ -127,10 +127,7 @@ void Player::drawCard(int hand, CardList &deck, int count)
 
     deck.transferTo(*chosenHand, count);
     if (playerType)
-        {
-            std::cout << chosenHand->outputPretty();
-            updateVal(hand);
-        }
+        std::cout << chosenHand->outputPretty();
     else
         std::cout << chosenHand->outputBlackjack();
     updateVal(hand % 2 == 0);
