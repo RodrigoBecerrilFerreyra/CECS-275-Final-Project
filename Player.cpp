@@ -63,7 +63,7 @@ Player::Player(int ID)
     } 
 }
 
-unsigned int Player::takeAction()
+Player::action Player::takeAction()
 {
     // TODO: 
     // Implement [Hit] logic
@@ -75,6 +75,7 @@ unsigned int Player::takeAction()
     // Implement [Stand] logic
     // - reveal dealer's hand; values for player and dealer
     // - also, update balance
+    
 }
 
 void Player::drawCard(int hand, CardList &deck, int count)
@@ -87,6 +88,7 @@ void Player::drawCard(int hand, CardList &deck, int count)
         std::cout << chosenHand->outputPretty();
     else
         std::cout << chosenHand->outputBlackjack();
+    updateVal(hand % 2 == 0);
 }
 
 void Player::returnCards(CardList &deck, CardList &hand)
