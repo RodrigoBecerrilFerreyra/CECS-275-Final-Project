@@ -140,13 +140,6 @@ class Player
             { if (playerType) playerRef->load(); }
         
         /**
-         * Get the value of the player's hand.
-         * @param corrVal Flag used to differentiate which value to return.
-         */
-        int getValue(int corrVal)
-            {return (corrVal % 2 == 0) ? value1 : value2;}
-        
-        /**
          * Wrapper for CardList::compareFirstTwoCards. Only works on hand1.
          * @return True if the first two cards have the same value,
          * false if they do not (or if there are less than two cards).
