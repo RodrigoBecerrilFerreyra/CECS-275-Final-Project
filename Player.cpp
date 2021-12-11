@@ -130,7 +130,7 @@ void Player::drawCard(int hand, CardList &deck, int count)
         std::cout << chosenHand->outputPretty();
     else
         std::cout << chosenHand->outputBlackjack();
-    updateVal(hand % 2 == 0);
+    updateVal(hand % 2);
 }
 
 void Player::returnCards(CardList &deck, CardList &hand)
