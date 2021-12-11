@@ -136,7 +136,7 @@ bool Player::canSplit()
         return false;
 }
 
-void Player::drawCard(int hand, CardList deck, int count)
+void Player::drawCard(int hand, CardList &deck, int count)
 {
     // sets the hand to hand1 or hand2
     CardList* chosenHand = (hand == 1) ? &hand1 : &hand2;
