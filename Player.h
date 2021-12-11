@@ -103,7 +103,7 @@ class Player
         /**
          * Outputs the Player object's associated Account.
          */
-        void showAccount()
+        void showAccount() const
             { std::cout << *playerRef; }
         
         /**
