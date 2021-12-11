@@ -80,6 +80,27 @@ class Player
         enum action {HIT, HOLD, BUST};
 
         /**
+         * Accepts a user's bet to begin the game.
+         * @param newBet  Desired sum to bet for new game.
+         * @throws InsufficientBalance if user bets more than account holds.
+         * @return Remaining balance in account.
+         */
+        double setBet(double newBet);
+
+        /**
+         * Getter function for hand/value1. 
+         * @return Hand 1's value.
+         */
+        int getValue1()
+            { return value1; }
+        /**
+         * Getter function for hand/value2. 
+         * @return Hand 2's value.
+         */
+        int getValue2()
+            { return value2; }
+        
+        /**
          * Has the player decide what to do in the current state of the game.
          * Should be called after receiving a card.
          * @returns The action to be taken by the Player.
@@ -91,6 +112,13 @@ class Player
          * @return Displayable string regarding valid choices and their meaning.
          */
         std::string actionsTerminal();
+
+        /**
+         * Verifies that the user's hand1 is composed of only duplicate 
+         * cards, therefore allowing the user to split.
+         * @returns   The user's hand is only identically-valued cards.
+         */
+        bool canSplit();
         
         /**
          * Gives the designated Player's hand the top cards from 
@@ -121,14 +149,6 @@ class Player
          * @param corrVal  Flag used to differentiate which value to update.
          */
         void updateVal(int corrVal);
-
-        /**
-         * Accepts a user's bet to begin the game.
-         * @param newBet  Desired sum to bet for new game.
-         * @throws InsufficientBalance if user bets more than account holds.
-         * @return Remaining balance in account.
-         */
-        double bet(double newBet);
         
         /**
          * Fetch account details IFF the Player object is a "Player" 
@@ -142,6 +162,7 @@ class Player
         int value1, value2;       // the values of each hand
         int playerType;           // 0 for "Dealer" or 1 for "Player"
         Account *playerRef;       // Defines Player's statistics
+        double bet;               // Player's current bet
 };
 
 #endif//PLAYER_H

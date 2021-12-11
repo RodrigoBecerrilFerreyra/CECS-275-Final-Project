@@ -39,6 +39,7 @@ Player::Player()
     hand1 = hand2 = nullptr;
     value1 = value2 = 0;
     playerType = 0;
+    bet = 0;
     playerRef = nullptr;
 }
 
@@ -74,6 +75,16 @@ Player::Player(int ID)
         // Default to playerType of dealer.
         playerType = 0;
     } 
+    bet = 0;
+}
+
+double Player::setBet(double newBet)
+{
+    double money = checkMoney();
+    if(money < newBet)
+        throw Account::NumNegative();
+    else
+        bet = newBet;
 }
 
 unsigned int Player::takeAction()
@@ -92,7 +103,27 @@ unsigned int Player::takeAction()
 
 std::string Player::actionsTerminal()
 {
-    hand1->listValue();
+    bool outputFlag = canSplit();
+    if (outputFlag)
+        return "1. Hit\n 2. Stand\n 3. Split\n------\n 0. Exit\n";
+    else
+        return "1. Hit\n 2. Stand\n ------\n 0. Exit\n";
+}
+
+bool Player::canSplit()
+{
+    // Take the total value of the cards and halve it...
+    int check = (hand1->listValue()) / 2;
+    // ...then verify that each "half" is present. (e.g. 14 == 2*7)
+    if (hand1->countCards(check) == 2)
+    {
+        if (bet*2 < checkMoney())
+            return true;
+        else
+            return false;
+    }
+    else
+        return false;
 }
 
 void Player::drawCard(CardList *hand, CardList deck, int count)
@@ -147,13 +178,4 @@ void Player::updateVal(int corrVal)
             }
         }
     }
-}
-
-double Player::bet(double newBet)
-{
-    double money = checkMoney();
-    if(money < newBet)
-        throw Account::NumNegative();
-    else
-        return (checkMoney()-newBet);
 }
