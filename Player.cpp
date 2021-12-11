@@ -24,10 +24,22 @@ std::string Player::InsufficientBalance::getErrorMessage()
     "over maximum possible Account balance.\n";
 }
 
+Player::NotAction::NotAction(int useAction)
+{
+    action = useAction;
+}
+
+std::string Player::NotAction::getErrorMessage()
+{
+    return "Not a valid action.\n";
+}
+
 Player::Player()
 {
     value1 = value2 = 0;
     playerType = 0;
+    bet1 = 0;
+    bet2 = 0;
     playerRef = nullptr;
 }
 
@@ -48,6 +60,7 @@ Player::Player(int ID)
         {
             // File did not already exist, so make a new one.
             std::cerr << e.getErrorMessage() << "\n";
+            std::cout << "Generating new account with provided ID.\n";
             playerRef->save();
         }
         catch(Account::NumOutOfBounds &e)
@@ -61,6 +74,35 @@ Player::Player(int ID)
         // Default to playerType of dealer.
         playerType = 0;
     } 
+    bet1 = 0;
+    bet2 = 0;
+}
+
+void Player::setBet(double newBet)
+{
+    double money = checkMoney();
+    if(money < newBet)
+        throw Player::InsufficientBalance(newBet,money);
+    else
+        bet1 = newBet;
+}
+
+int Player::getValue(int corrVal)
+{
+    if (corrVal == 1)
+        return value1;
+    else 
+        return value2;
+}
+
+void Player::setBet()
+{
+    // Verify once more that this is a possible bet.
+    double money = checkMoney();
+    if(money < bet1*2)
+        throw Player::InsufficientBalance(bet1,money);
+    else
+        bet2 = bet1;
 }
 
 Player::action Player::takeAction()
@@ -100,7 +142,7 @@ void Player::updateVal(int corrVal)
 {
     int numAces = 0;
     // Input is 0, 2, 4, etc. Ideally the input is 0 for hand1.
-    if(corrVal % 2 == 0)
+    if (corrVal % 2 == 0)
     {
         value1 = hand1.listValue();
         // Special handling for Aces being both 1 and 11.
@@ -114,7 +156,7 @@ void Player::updateVal(int corrVal)
                 do {
                     value1 -= 10;
                     numAces--;
-                } while (numAces);
+                } while (numAces && value1 > 21);
             }
         }
     } else {
@@ -130,9 +172,8 @@ void Player::updateVal(int corrVal)
                 do {
                     value2 -= 10;
                     numAces--;
-                } while (numAces);
+                } while (numAces && value2 > 21);
             }
         }
     }
 }
-

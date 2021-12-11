@@ -38,6 +38,21 @@ class Player
                 double bet;
         };
         /**
+         * Class for exception handling of invalid action.
+         */
+        class NotAction : public std::exception
+        {
+            public:
+                NotAction(int useAction);
+                /**
+                 * Builds an error message and returns it.
+                 * @return A detailed error message.
+                 */
+                std::string getErrorMessage();
+            private:
+                int action;
+        };
+        /**
          * Initialization constructor to create a new Player. Defaults to a 
          * "dealer"-type Player, which disables the ability to save or 
          * load an Account.
@@ -48,23 +63,40 @@ class Player
          * Constructor specific to a "player"-type Player. Similar 
          * implementation to default constructor but specifically 
          * activates ability to set up Account.
-         * @param ID  Some non-zero number to allow Account access.
+         * @param ID  Positive integer to attempt accessing account. 
+         * @throws FileNotFound if no text file but valid account. 
+         * @throws NumOutOfBounds if player ID not 8-digit positive integer. 
          */
         Player(int ID);
-
-        /**
-         * Copy constructor to copy the hands and Account of another Player.
-         */ 
-        Player(Player const &other);
-        // THIS HAS NOT YET BEEN IMPLEMENTED
 
         /** This enum specifies the action that the user takes after
         receiving a card. */
         enum action {HIT, HOLD, BUST};
 
         /**
+         * Overloaded function acepts a user's bet to begin the game.
+         * @param newBet  Desired sum to bet for new game.
+         * @throws InsufficientBalance if user bets more than account holds.
+         */
+        void setBet(double newBet);
+        /**
+         * Overloaded function copies the value of bet1 over to bet2. 
+         * Used when splitting.
+         * @throws InsufficientBalance if user bets more than account holds.
+         */
+        void setBet();
+
+        /**
+         * Getter function for hand/value.
+         * @param corrVal  The hand to retrieve the value for.
+         * @return         Value of the hand.
+         */
+        int getValue(int corrVal);
+        
+        /**
          * Has the player decide what to do in the current state of the game.
          * Should be called after receiving a card.
+         * @param action   User's action.
          * @returns The action to be taken by the Player.
          */
         action takeAction();
@@ -86,7 +118,7 @@ class Player
         void returnCards(CardList &deck, CardList &hand);
 
         /**
-         * Wrapper function for checking the user's current balance in 
+         * Wrapper function to retrieve the user's current balance in 
          * their account to verify that they are making a legal bet.
          * @return     The user's current balance of funds.
          */
@@ -118,6 +150,7 @@ class Player
         int value1, value2;       // the values of each hand
         int playerType;           // 0 for "Dealer" or 1 for "Player"
         Account *playerRef;       // Defines Player's statistics
+        double bet1, bet2;        // Player's current bets
 };
 
 #endif//PLAYER_H
