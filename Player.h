@@ -90,11 +90,28 @@ class Player
         void setBet();
 
         /**
+         * Account wrapper function that takes the user's earnings 
+         * and updates their associated Account parameters.
+         * @param win  How much money was won in the game.
+         * @param loss How much money was lost in the game.
+         */
+        void updateAccount(double win, double loss)
+            { playerRef->inputGameResults(win, loss); }
+
+        /**
          * Getter function for hand/value.
          * @param corrVal  The hand to retrieve the value for.
          * @return         Value of the hand.
          */
         int getValue(int corrVal) const;
+
+        /**
+         * Getter function for user's initial bet.
+         * Used to ensure that the user can split.
+         * @return     User's current bet.
+         */
+        double getBet() const
+            { return bet1; }
 
         /**
          * Getter function for player's account.
@@ -108,14 +125,6 @@ class Player
          */
         void showAccount() const
             { std::cout << *playerRef << "\n"; }
-        
-        /**
-         * Has the player decide what to do in the current state of the game.
-         * Should be called after receiving a card.
-         * @param action   User's action.
-         * @returns The action to be taken by the Player.
-         */
-        action takeAction();
         
         /**
          * Gives the designated Player's hand the top cards from 

@@ -105,21 +105,6 @@ void Player::setBet()
         bet2 = bet1;
 }
 
-Player::action Player::takeAction()
-{
-    // TODO: 
-    // Implement [Hit] logic
-    // - drawCard(hand,deck,1)?
-    // - [Hit] as many times as one wishes until over 21
-    // Implement branch for [Split] logic
-    // - some way to differentiate between hands
-    // - also, verify that user can even make the second bet
-    // Implement [Stand] logic
-    // - reveal dealer's hand; values for player and dealer
-    // - also, update balance
-    return HIT;
-}
-
 void Player::drawCard(int hand, CardList &deck, int count)
 {
     // sets the hand to hand1 or hand2

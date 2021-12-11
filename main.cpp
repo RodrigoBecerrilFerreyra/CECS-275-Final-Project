@@ -14,6 +14,8 @@ int main()
 {
     int useroption; bool splitflag;
     int hand1val, hand2val, dealval;
+    double userBet;
+    int validBet = 0;
     // build deck
     CardList deck;
     // create 52 cards
@@ -31,36 +33,78 @@ int main()
 
     std::cout << "Please enter your ID number (if you do not have one, input"
         << " any number): ";
-    //std::cin >> useroption;
-    useroption = 11111111;
+    std::cin >> useroption;
+    //useroption = 11111111;
 
     Player player(useroption);
     Player dealer;
+
+    std::cout << "************************************************\n";
+    player.showAccount();
+    std::cout << "************************************************\n";
 
     // do-while loops until user decides to exit program
     do
     {
         splitflag = false;
         deck.shuffle();
+        std::cout << "Please input your bet now.\n";
+        std::cin >> userBet;
+        try
+        {
+            player.setBet(userBet);
+        }
+        catch(Player::InsufficientBalance &e)
+        {
+            std::cerr << e.getErrorMessage() << "\n";
+            do 
+            {
+                std::cout << "Please input a valid bet.\n";
+                std::cin >> userBet;
+                try
+                {
+                    player.setBet(userBet);
+                    validBet = 1;
+                }
+                catch(Player::InsufficientBalance &e)
+                {
+                    std::cerr << e.getErrorMessage() << "\n";
+                }
+            } while(validBet == 0);
+        }
+        std::cout << "************************************************\n";
 
         // deals two cards to each
         std::cout << "Dealer's cards:\n";
         dealer.drawCard(0, deck, 2);
+        std::cout << "************************************************\n";
         std::cout << "Your cards:\n";
         player.drawCard(0, deck, 2);
 
-        if(player.splitCondition())
+        if(player.checkMoney() >= player.getBet()*2)
         {
-            std::cout << "You received two of the same card. Would you like to"
-                << " split? 0 for no, 1 for yes: ";
-            std::cin >> useroption;
-            if(useroption)
+            if(player.splitCondition())
             {
-                splitflag = true;
-                player.split();
+                std::cout << "You received two of the same card. Would you like to"
+                    << " split? 0 for no, 1 for yes: ";
+                std::cin >> useroption;
+                if(useroption)
+                {
+                    splitflag = true;
+                    try
+                    {
+                        player.setBet();
+                    }
+                    catch(Player::InsufficientBalance &e)
+                    {
+                        std::cerr << e.getErrorMessage() << "\n";
+                    }
+                    player.split();
+                }
             }
         }
 
+        std::cout << "************************************************\n";
         // hand 1
         std::cout << "Now playing: hand 1.\n";
         std::cout << player.outputPrettyWrapper(0) << "\n";
@@ -116,22 +160,30 @@ int main()
         if(hand1val > 21)
         {
             std::cout << "Bust! You lose.\n";
-            // lose bet
+            player.updateAccount(0,userBet);
+            std::cout << "************************************************\n";
+            player.showAccount();
         }
         else if(hand1val > dealval)
         {
             std::cout << "You win!\n";
-            // double bet
+            player.updateAccount(userBet*2,0);
+            std::cout << "************************************************\n";
+            player.showAccount();
         }
         else if(hand1val < dealval)
         {
             std::cout << "You lose.\n";
-            // lose bet
+            player.updateAccount(0,userBet);
+            std::cout << "************************************************\n";
+            player.showAccount();
         }
         else // tie
         {
             std::cout << "It's a tie!\n";
-            // split bet
+            player.updateAccount(0,userBet/2);
+            std::cout << "************************************************\n";
+            player.showAccount();
         }
 
         if(splitflag)
@@ -140,28 +192,37 @@ int main()
             if(hand2val > 21)
             {
                 std::cout << "Bust! You lose.\n";
-                // lose bet
+                player.updateAccount(0,userBet);
+                std::cout << "************************************************\n";
+                player.showAccount();
             }
             else if(hand2val > dealval)
             {
                 std::cout << "You win!\n";
-                // double bet
+                player.updateAccount(userBet*2,0);
+                std::cout << "************************************************\n";
+                player.showAccount();
             }
             else if(hand2val < dealval)
             {
                 std::cout << "You lose.\n";
-                // lose bet
+                player.updateAccount(0,userBet);
+                std::cout << "************************************************\n";
+                player.showAccount();
             }
             else // tie
             {
                 std::cout << "It's a tie!\n";
-                // split bet
+                player.updateAccount(0,userBet/2);
+                std::cout << "************************************************\n";
+                player.showAccount();
             }
         }
 
+        std::cout << "************************************************\n";
         std::cout << "Enter 0 to quit or 1 to continue: ";
-        //std::cin >> useroption;
-        useroption = 0;
+        std::cin >> useroption;
+        //useroption = 0;
     } while(useroption);
 
     return 0;
