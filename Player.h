@@ -99,20 +99,7 @@ class Player
          * @param action   User's action.
          * @returns The action to be taken by the Player.
          */
-        unsigned int takeAction(unsigned int action);
-
-        /**
-         * Generates a display of what actions the Player can take.
-         * @return Displayable string regarding valid choices and their meaning.
-         */
-        std::string actionsTerminal();
-
-        /**
-         * Verifies that the user's hand1 is composed of only duplicate 
-         * cards, therefore allowing the user to split.
-         * @returns   The user's hand is only identically-valued cards.
-         */
-        bool canSplit();
+        action takeAction();
         
         /**
          * Gives the designated Player's hand the top cards from 
@@ -151,6 +138,13 @@ class Player
          */
         void prevAccount()
             { if (playerType) playerRef->load(); }
+        
+        /**
+         * Get the value of the player's hand.
+         * @param corrVal Flag used to differentiate which value to return.
+         */
+        int getValue(int corrVal)
+            {return (corrVal % 2 == 0) ? value1 : value2;}
     private:
         CardList hand1, hand2;    // the hands to hold the CardLists
         int value1, value2;       // the values of each hand

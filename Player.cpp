@@ -105,7 +105,7 @@ void Player::setBet()
         bet2 = bet1;
 }
 
-unsigned int Player::takeAction(unsigned int action)
+Player::action Player::takeAction()
 {
     // TODO: 
     // Implement [Hit] logic
@@ -117,31 +117,7 @@ unsigned int Player::takeAction(unsigned int action)
     // Implement [Stand] logic
     // - reveal dealer's hand; values for player and dealer
     // - also, update balance
-}
-
-std::string Player::actionsTerminal()
-{
-    bool outputFlag = canSplit();
-    if (outputFlag)
-        return "1. Hit\n 2. Stand\n 3. Split\n------\n 0. Exit\n";
-    else
-        return "1. Hit\n 2. Stand\n ------\n 0. Exit\n";
-}
-
-bool Player::canSplit()
-{
-    // Take the total value of the cards and halve it...
-    int check = (hand1.listValue()) / 2;
-    // ...then verify that each "half" is present. (e.g. 14 == 2*7)
-    if (hand1.countCards(check) == 2)
-    {
-        if (bet1*2 < checkMoney())
-            return true;
-        else
-            return false;
-    }
-    else
-        return false;
+    
 }
 
 void Player::drawCard(int hand, CardList &deck, int count)
@@ -156,10 +132,8 @@ void Player::drawCard(int hand, CardList &deck, int count)
             updateVal(hand);
         }
     else
-        {
-            std::cout << chosenHand->outputBlackjack();
-            updateVal(hand);
-        }
+        std::cout << chosenHand->outputBlackjack();
+    updateVal(hand % 2 == 0);
 }
 
 void Player::returnCards(CardList &deck, CardList &hand)
