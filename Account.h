@@ -91,7 +91,8 @@ class Account
 
         /**
          * This overloaded constructor allows the user to set the value for
-         * one of the class's members.
+         * one of the class's members. Uses a known Account Number to 
+         * attempt to load value from a .txt file.
          * @param accountNumber The account number of the new account.
          * @throws ParameterOutOfBounds if the account number is not a
          * positive eight-digit number.

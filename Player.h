@@ -23,6 +23,9 @@
 class Player
 {
     public:
+// *****************************************************************************
+// Exception handling classes
+// *****************************************************************************
         /**
          * Class for exception handling of betting more than the playerRef 
          * Account's balance.
@@ -55,6 +58,9 @@ class Player
             private:
                 double bet;
         };
+// *****************************************************************************
+// constructors
+// *****************************************************************************
         /**
          * Initialization constructor to create a new Player. Defaults to a 
          * "dealer"-type Player, which disables the ability to save or 
@@ -71,11 +77,9 @@ class Player
          * @throws NumOutOfBounds if player ID not 8-digit positive integer. 
          */
         Player(int ID);
-
-        /** This enum specifies the action that the user takes after
-        receiving a card. */
-        enum action {HIT, HOLD, BUST};
-
+// *****************************************************************************
+// setter and getter functions
+// *****************************************************************************
         /**
          * Overloaded function acepts a user's bet to begin the game.
          * @param newBet  Desired sum to bet for new game.
@@ -125,7 +129,17 @@ class Player
          */
         void showAccount() const
             { std::cout << *playerRef << "\n"; }
-        
+
+        /**
+         * Wrapper function to retrieve the user's current balance in 
+         * their account to verify that they are making a legal bet.
+         * @return     The user's current balance of funds.
+         */
+        double checkMoney()
+            { return playerRef->getBalance(); }
+// *****************************************************************************
+// other functions
+// *****************************************************************************        
         /**
          * Gives the designated Player's hand the top cards from 
          * another CardList. 
@@ -141,20 +155,6 @@ class Player
          * @param hand   Player's hand to remove cards from.
          */
         void returnCards(CardList &deck, int hand);
-
-        /**
-         * Wrapper function to retrieve the user's current balance in 
-         * their account to verify that they are making a legal bet.
-         * @return     The user's current balance of funds.
-         */
-        double checkMoney()
-            { return playerRef->getBalance(); }
-
-        /**
-         * Wrapper function to update the value of Player's hand. 
-         * @param corrVal  Flag used to differentiate which value to update.
-         */
-        void updateVal(int corrVal);
         
         /**
          * Wrapper for CardList::compareFirstTwoCards. Only works on hand1.
@@ -163,6 +163,12 @@ class Player
          */
         bool splitCondition()
             {return hand1.compareFirstTwoCards();}
+
+        /**
+         * Wrapper function to update the value of Player's hand. 
+         * @param corrVal  Flag used to differentiate which value to update.
+         */
+        void updateVal(int corrVal);
         
         /**
          * Wrapper for CardList::outputPretty()

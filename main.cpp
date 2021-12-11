@@ -34,7 +34,6 @@ int main()
     std::cout << "Please enter your ID number (if you do not have one, input"
         << " any number): ";
     std::cin >> useroption;
-    //useroption = 11111111;
 
     Player player(useroption);
     Player dealer;
@@ -250,7 +249,6 @@ int main()
         std::cout << "************************************************\n";
         std::cout << "Enter 0 to quit or 1 to continue: ";
         std::cin >> useroption;
-        //useroption = 0;
     } while(useroption);
 
     return 0;
