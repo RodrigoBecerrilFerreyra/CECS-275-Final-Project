@@ -36,7 +36,6 @@ std::string Player::NotAction::getErrorMessage()
 
 Player::Player()
 {
-    hand1 = hand2 = nullptr;
     value1 = value2 = 0;
     playerType = 0;
     bet1 = 0;
@@ -46,7 +45,6 @@ Player::Player()
 
 Player::Player(int ID)
 {
-    hand1 = hand2 = nullptr;
     playerRef = nullptr;
     value1 = value2 = 0;
     // If ID is a positive value, attempt to load/save account.
@@ -125,9 +123,9 @@ std::string Player::actionsTerminal()
 bool Player::canSplit()
 {
     // Take the total value of the cards and halve it...
-    int check = (hand1->listValue()) / 2;
+    int check = (hand1.listValue()) / 2;
     // ...then verify that each "half" is present. (e.g. 14 == 2*7)
-    if (hand1->countCards(check) == 2)
+    if (hand1.countCards(check) == 2)
     {
         if (bet1*2 < checkMoney())
             return true;
@@ -138,18 +136,21 @@ bool Player::canSplit()
         return false;
 }
 
-void Player::drawCard(CardList *hand, CardList deck, int count)
+void Player::drawCard(int hand, CardList deck, int count)
 {
-    deck.transferTo(*hand, count);
+    // sets the hand to hand1 or hand2
+    CardList* chosenHand = (hand == 1) ? &hand1 : &hand2;
+
+    deck.transferTo(*chosenHand, count);
     if (playerType)
-        std::cout << hand->outputPretty();
+        std::cout << chosenHand->outputPretty();
     else
-        std::cout << hand->outputBlackjack();
+        std::cout << chosenHand->outputBlackjack();
 }
 
-void Player::returnCards(CardList deck, CardList* hand)
+void Player::returnCards(CardList &deck, CardList &hand)
 {
-    hand->transferTo(deck);
+    hand.transferTo(deck);
 }
 
 void Player::updateVal(int corrVal)
@@ -158,9 +159,9 @@ void Player::updateVal(int corrVal)
     // Input is 0, 2, 4, etc. Ideally the input is 0 for hand1.
     if (corrVal % 2 == 0)
     {
-        value1 = hand1->listValue();
+        value1 = hand1.listValue();
         // Special handling for Aces being both 1 and 11.
-        numAces = hand1->countCards(1);
+        numAces = hand1.countCards(1);
         if (numAces)
         {
             value1 += numAces*10;
@@ -174,9 +175,9 @@ void Player::updateVal(int corrVal)
             }
         }
     } else {
-        value2 = hand2->listValue();
+        value2 = hand2.listValue();
         // Special handling for Aces being both 1 and 11.
-        numAces = hand2->countCards(1);
+        numAces = hand2.countCards(1);
         if (numAces)
         {
             value2 += numAces*10;
