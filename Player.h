@@ -67,7 +67,7 @@ class Player
          * Should be called after receiving a card.
          * @returns The action to be taken by the Player.
          */
-        unsigned int takeAction();
+        action takeAction();
         
         /**
          * Gives the designated Player's hand the top cards from 
@@ -106,6 +106,13 @@ class Player
          */
         void prevAccount()
             { if (playerType) playerRef->load(); }
+        
+        /**
+         * Get the value of the player's hand.
+         * @param corrVal Flag used to differentiate which value to return.
+         */
+        int getValue(int corrVal)
+            {return (corrVal % 2 == 0) ? value1 : value2;}
     private:
         CardList hand1, hand2;    // the hands to hold the CardLists
         int value1, value2;       // the values of each hand
