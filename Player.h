@@ -87,17 +87,11 @@ class Player
         void setBet();
 
         /**
-         * Getter function for hand/value1. 
-         * @return Hand 1's value.
+         * Getter function for hand/value.
+         * @param corrVal  The hand to retrieve the value for.
+         * @return         Value of the hand.
          */
-        int getValue1()
-            { return value1; }
-        /**
-         * Getter function for hand/value2. 
-         * @return Hand 2's value.
-         */
-        int getValue2()
-            { return value2; }
+        int getValue(int corrVal);
         
         /**
          * Has the player decide what to do in the current state of the game.

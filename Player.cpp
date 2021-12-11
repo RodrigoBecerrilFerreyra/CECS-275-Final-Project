@@ -87,6 +87,14 @@ void Player::setBet(double newBet)
         bet1 = newBet;
 }
 
+int Player::getValue(int corrVal)
+{
+    if (corrVal == 1)
+        return value1;
+    else 
+        return value2;
+}
+
 void Player::setBet()
 {
     // Verify once more that this is a possible bet.
@@ -143,9 +151,15 @@ void Player::drawCard(int hand, CardList &deck, int count)
 
     deck.transferTo(*chosenHand, count);
     if (playerType)
-        std::cout << chosenHand->outputPretty();
+        {
+            std::cout << chosenHand->outputPretty();
+            updateVal(hand);
+        }
     else
-        std::cout << chosenHand->outputBlackjack();
+        {
+            std::cout << chosenHand->outputBlackjack();
+            updateVal(hand);
+        }
 }
 
 void Player::returnCards(CardList &deck, CardList &hand)
