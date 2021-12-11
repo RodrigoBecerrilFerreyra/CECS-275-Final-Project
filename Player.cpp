@@ -87,7 +87,7 @@ void Player::setBet(double newBet)
         bet1 = newBet;
 }
 
-int Player::getValue(int corrVal)
+int Player::getValue(int corrVal) const
 {
     if (corrVal == 0)
         return value1;

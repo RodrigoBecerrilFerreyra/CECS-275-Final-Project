@@ -91,14 +91,20 @@ class Player
          * @param corrVal  The hand to retrieve the value for.
          * @return         Value of the hand.
          */
-        int getValue(int corrVal);
+        int getValue(int corrVal) const;
 
         /**
          * Getter function for player's account.
          * @return    Account parameters.
          */ 
-        Account getAccount()
+        Account getAccount() const
             { return *playerRef; }
+
+        /**
+         * Outputs the Player object's associated Account.
+         */
+        void showAccount()
+            { std::cout << *playerRef; }
         
         /**
          * Has the player decide what to do in the current state of the game.
