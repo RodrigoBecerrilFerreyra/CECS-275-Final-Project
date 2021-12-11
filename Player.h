@@ -38,6 +38,21 @@ class Player
                 double bet;
         };
         /**
+         * Class for exception handling of invalid action.
+         */
+        class NotAction : public std::exception
+        {
+            public:
+                NotAction(int useAction);
+                /**
+                 * Builds an error message and returns it.
+                 * @return A detailed error message.
+                 */
+                std::string getErrorMessage();
+            private:
+                int action;
+        };
+        /**
          * Initialization constructor to create a new Player. Defaults to a 
          * "dealer"-type Player, which disables the ability to save or 
          * load an Account.
@@ -48,7 +63,9 @@ class Player
          * Constructor specific to a "player"-type Player. Similar 
          * implementation to default constructor but specifically 
          * activates ability to set up Account.
-         * @param ID  Some non-zero number to allow Account access.
+         * @param ID  Positive integer to attempt accessing account. 
+         * @throws FileNotFound if no text file but valid account. 
+         * @throws NumOutOfBounds if player ID not 8-digit positive integer. 
          */
         Player(int ID);
 
@@ -68,6 +85,12 @@ class Player
          * @returns The action to be taken by the Player.
          */
         unsigned int takeAction();
+
+        /**
+         * Generates a display of what actions the Player can take.
+         * @return Displayable string regarding valid choices and their meaning.
+         */
+        std::string actionsTerminal();
         
         /**
          * Gives the designated Player's hand the top cards from 
@@ -86,7 +109,7 @@ class Player
         void returnCards(CardList deck, CardList* hand);
 
         /**
-         * Wrapper function for checking the user's current balance in 
+         * Wrapper function to retrieve the user's current balance in 
          * their account to verify that they are making a legal bet.
          * @return     The user's current balance of funds.
          */
@@ -98,6 +121,14 @@ class Player
          * @param corrVal  Flag used to differentiate which value to update.
          */
         void updateVal(int corrVal);
+
+        /**
+         * Accepts a user's bet to begin the game.
+         * @param newBet  Desired sum to bet for new game.
+         * @throws InsufficientBalance if user bets more than account holds.
+         * @return Remaining balance in account.
+         */
+        double bet(double newBet);
         
         /**
          * Fetch account details IFF the Player object is a "Player" 

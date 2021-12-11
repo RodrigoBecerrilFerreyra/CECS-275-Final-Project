@@ -24,6 +24,16 @@ std::string Player::InsufficientBalance::getErrorMessage()
     "over maximum possible Account balance.\n";
 }
 
+Player::NotAction::NotAction(int useAction)
+{
+    action = useAction;
+}
+
+std::string Player::NotAction::getErrorMessage()
+{
+    return "Not a valid action.\n";
+}
+
 Player::Player()
 {
     hand1 = hand2 = nullptr;
@@ -50,6 +60,7 @@ Player::Player(int ID)
         {
             // File did not already exist, so make a new one.
             std::cerr << e.getErrorMessage() << "\n";
+            std::cout << "Generating new account with provided ID.\n";
             playerRef->save();
         }
         catch(Account::NumOutOfBounds &e)
@@ -79,6 +90,11 @@ unsigned int Player::takeAction()
     // - also, update balance
 }
 
+std::string Player::actionsTerminal()
+{
+    hand1->listValue();
+}
+
 void Player::drawCard(CardList *hand, CardList deck, int count)
 {
     deck.transferTo(*hand, count);
@@ -97,7 +113,7 @@ void Player::updateVal(int corrVal)
 {
     int numAces = 0;
     // Input is 0, 2, 4, etc. Ideally the input is 0 for hand1.
-    if(corrVal % 2 == 0)
+    if (corrVal % 2 == 0)
     {
         value1 = hand1->listValue();
         // Special handling for Aces being both 1 and 11.
@@ -111,7 +127,7 @@ void Player::updateVal(int corrVal)
                 do {
                     value1 -= 10;
                     numAces--;
-                } while (numAces);
+                } while (numAces && value1 > 21);
             }
         }
     } else {
@@ -127,9 +143,17 @@ void Player::updateVal(int corrVal)
                 do {
                     value2 -= 10;
                     numAces--;
-                } while (numAces);
+                } while (numAces && value2 > 21);
             }
         }
     }
 }
 
+double Player::bet(double newBet)
+{
+    double money = checkMoney();
+    if(money < newBet)
+        throw Account::NumNegative();
+    else
+        return (checkMoney()-newBet);
+}
