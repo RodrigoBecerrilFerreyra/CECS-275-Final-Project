@@ -154,8 +154,9 @@ class Player
         bool splitCondition()
             {return hand1.compareFirstTwoCards();}
 
-    private:
         CardList hand1, hand2;    // the hands to hold the CardLists
+
+    private:
         int value1, value2;       // the values of each hand
         int playerType;           // 0 for "Dealer" or 1 for "Player"
         Account *playerRef;       // Defines Player's statistics
