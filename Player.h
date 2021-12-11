@@ -104,7 +104,7 @@ class Player
          * Outputs the Player object's associated Account.
          */
         void showAccount() const
-            { std::cout << *playerRef; }
+            { std::cout << *playerRef << "\n"; }
         
         /**
          * Has the player decide what to do in the current state of the game.
