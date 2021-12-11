@@ -79,13 +79,16 @@ unsigned int Player::takeAction()
     // - also, update balance
 }
 
-void Player::drawCard(CardList *hand, CardList deck, int count)
+void Player::drawCard(int hand, CardList &deck, int count)
 {
-    deck.transferTo(*hand, count);
+    // sets the hand to hand1 or hand2
+    CardList* chosenHand = (hand == 1) ? hand1 : hand2;
+
+    deck.transferTo(*chosenHand, count);
     if (playerType)
-        std::cout << hand->outputPretty();
+        std::cout << chosenHand->outputPretty();
     else
-        std::cout << hand->outputBlackjack();
+        std::cout << chosenHand->outputBlackjack();
 }
 
 void Player::returnCards(CardList deck, CardList* hand)

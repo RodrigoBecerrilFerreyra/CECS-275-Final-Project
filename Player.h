@@ -76,7 +76,7 @@ class Player
          * @param deck  Base CardList to take cards from.
          * @param count How many cards from the target CardList to take.
          */
-        void drawCard(CardList *hand, CardList deck, int count);
+        void drawCard(int hand, CardList &deck, int count);
 
         /**
          * Returns the designated Player's hand to a larger pool.
