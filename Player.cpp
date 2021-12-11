@@ -61,7 +61,7 @@ Player::Player(int ID)
             // File did not already exist, so make a new one.
             std::cerr << e.getErrorMessage() << "\n";
             std::cout << "Generating new account with provided ID.\n";
-            playerRef->save();
+            playerRef = new Account(ID,1000);
         }
         catch(Account::NumOutOfBounds &e)
         {
@@ -117,7 +117,7 @@ Player::action Player::takeAction()
     // Implement [Stand] logic
     // - reveal dealer's hand; values for player and dealer
     // - also, update balance
-    
+    return HIT;
 }
 
 void Player::drawCard(int hand, CardList &deck, int count)
