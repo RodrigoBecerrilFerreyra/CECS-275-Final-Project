@@ -57,13 +57,13 @@ int main()
             if(useroption)
             {
                 splitflag = true;
-                player.hand1.transferTo(player.hand2, 1);
+                player.split();
             }
         }
 
         // hand 1
         std::cout << "Now playing: hand 1." << std::endl;
-        player.hand1.outputPretty();
+        player.outputPrettyWrapper(0);
         std::cout << "Value: " << player.getValue(0) << "\n";
         while(true)
         {
@@ -85,7 +85,7 @@ int main()
         if(splitflag)
         {
             std::cout << "Now playing: hand 2." << std::endl;
-            player.hand2.outputPretty();
+            player.outputPrettyWrapper(1);
             std::cout << "Value: " << player.getValue(1) << "\n";
             while(true)
             {
@@ -109,7 +109,7 @@ int main()
         dealval  = dealer.getValue(0);
 
         std::cout << "Dealer's hand:" << std::endl;
-        dealer.hand1.outputPretty();
+        dealer.outputPrettyWrapper(0);
         std::cout << "Value: " << dealval << "\n";
 
         std::cout << "Results for Game 1:\n";
