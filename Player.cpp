@@ -118,9 +118,12 @@ void Player::drawCard(int hand, CardList &deck, int count)
     updateVal(hand % 2);
 }
 
-void Player::returnCards(CardList &deck, CardList &hand)
+void Player::returnCards(CardList &deck, int hand)
 {
-    hand.transferTo(deck);
+    if (hand%2 == 0)
+        hand1.transferTo(deck);
+    else
+        hand2.transferTo(deck);
 }
 
 void Player::updateVal(int corrVal)
@@ -168,5 +171,7 @@ bool Player::split()
     if(hand1.size() != 2)
         return false;
     hand1.transferTo(hand2, 1);
+    updateVal(0);
+    updateVal(1);
     return true;
 }

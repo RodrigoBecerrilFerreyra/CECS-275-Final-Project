@@ -140,7 +140,7 @@ class Player
          * @param deck   Card pool to place Player's cards back into. 
          * @param hand   Player's hand to remove cards from.
          */
-        void returnCards(CardList &deck, CardList &hand);
+        void returnCards(CardList &deck, int hand);
 
         /**
          * Wrapper function to retrieve the user's current balance in 

@@ -185,7 +185,7 @@ int main()
             std::cout << "************************************************\n";
             player.showAccount();
         }
-
+        std::cout << "************************************************\n";
         if(splitflag)
         {
             std::cout << "Results for Game 2:\n";
@@ -218,7 +218,9 @@ int main()
                 player.showAccount();
             }
         }
-
+        player.returnCards(deck,0);
+        player.returnCards(deck,1);
+        dealer.returnCards(deck,0);
         std::cout << "************************************************\n";
         std::cout << "Enter 0 to quit or 1 to continue: ";
         std::cin >> useroption;
