@@ -123,14 +123,14 @@ Player::action Player::takeAction()
 void Player::drawCard(int hand, CardList &deck, int count)
 {
     // sets the hand to hand1 or hand2
-    CardList* chosenHand = (hand == 1) ? &hand1 : &hand2;
+    CardList* chosenHand = (hand % 2 == 0) ? &hand1 : &hand2;
 
     deck.transferTo(*chosenHand, count);
     if (playerType)
         std::cout << chosenHand->outputPretty();
     else
         std::cout << chosenHand->outputBlackjack();
-    updateVal(hand % 2);
+    updateVal(hand % 2 == 0);
 }
 
 void Player::returnCards(CardList &deck, CardList &hand)
