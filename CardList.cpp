@@ -136,6 +136,15 @@ unsigned int CardList::listValue() const
     return total;
 }
 
+bool CardList::compareFirstTwoCards()
+{
+    if(numCards < 2) return false;
+
+    if(headPtr->value == (headPtr->nextCard)->value)
+        return true;
+    return false;
+}
+
 CardList::CardList(const CardList &copyFromMe)
 {
     headPtr = nullptr; numCards = 0;
