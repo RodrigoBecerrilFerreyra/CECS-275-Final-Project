@@ -89,7 +89,7 @@ void Player::setBet(double newBet)
 
 int Player::getValue(int corrVal)
 {
-    if (corrVal == 1)
+    if (corrVal == 0)
         return value1;
     else 
         return value2;
