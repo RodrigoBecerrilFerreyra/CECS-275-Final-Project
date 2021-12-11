@@ -158,12 +158,12 @@ class Player
          * Wrapper for CardList::outputPretty()
          * @param corrVal Flag used to differentiate between the CardLists.
          */
-        void outputPrettyWrapper(int corrVal)
+        std::string outputPrettyWrapper(int corrVal)
         {
             if(corrVal == 0)
-                hand1.outputPretty();
+                return hand1.outputPretty();
             else
-                hand2.outputPretty();
+                return hand2.outputPretty();
         }
 
         /**
