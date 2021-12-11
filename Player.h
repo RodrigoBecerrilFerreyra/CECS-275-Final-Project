@@ -139,14 +139,6 @@ class Player
         void updateVal(int corrVal);
         
         /**
-         * Fetch account details IFF the Player object is a "Player" 
-         * rather than a "Dealer" as only the former needs to 
-         * have an account.
-         */
-        void prevAccount()
-            { if (playerType) playerRef->load(); }
-        
-        /**
          * Wrapper for CardList::compareFirstTwoCards. Only works on hand1.
          * @return True if the first two cards have the same value,
          * false if they do not (or if there are less than two cards).
