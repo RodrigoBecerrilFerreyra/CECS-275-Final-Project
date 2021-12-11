@@ -62,8 +62,8 @@ int main()
         }
 
         // hand 1
-        std::cout << "Now playing: hand 1." << std::endl;
-        player.outputPrettyWrapper(0);
+        std::cout << "Now playing: hand 1.\n";
+        std::cout << player.outputPrettyWrapper(0) << "\n";
         std::cout << "Value: " << player.getValue(0) << "\n";
         while(true)
         {
@@ -84,8 +84,8 @@ int main()
         // hand 2
         if(splitflag)
         {
-            std::cout << "Now playing: hand 2." << std::endl;
-            player.outputPrettyWrapper(1);
+            std::cout << "Now playing: hand 2.\n";
+            std::cout << player.outputPrettyWrapper(1) << "\n";
             std::cout << "Value: " << player.getValue(1) << "\n";
             while(true)
             {
@@ -108,8 +108,8 @@ int main()
         hand2val = player.getValue(1);
         dealval  = dealer.getValue(0);
 
-        std::cout << "Dealer's hand:" << std::endl;
-        dealer.outputPrettyWrapper(0);
+        std::cout << "Dealer's hand:\n";
+        std::cout << dealer.outputPrettyWrapper(0) << "\n";
         std::cout << "Value: " << dealval << "\n";
 
         std::cout << "Results for Game 1:\n";
