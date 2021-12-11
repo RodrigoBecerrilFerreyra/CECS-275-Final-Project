@@ -43,17 +43,17 @@ class Player
         /**
          * Class for exception handling of invalid action.
          */
-        class NotAction : public std::exception
+        class NoBet : public std::exception
         {
             public:
-                NotAction(int useAction);
+                NoBet(double userBet);
                 /**
                  * Builds an error message and returns it.
                  * @return A detailed error message.
                  */
                 std::string getErrorMessage();
             private:
-                int action;
+                double bet;
         };
         /**
          * Initialization constructor to create a new Player. Defaults to a 

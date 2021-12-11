@@ -24,14 +24,14 @@ std::string Player::InsufficientBalance::getErrorMessage()
     + " over maximum possible Account balance.\n";
 }
 
-Player::NotAction::NotAction(int useAction)
+Player::NoBet::NoBet(double userBet)
 {
-    action = useAction;
+    bet = userBet;
 }
 
-std::string Player::NotAction::getErrorMessage()
+std::string Player::NoBet::getErrorMessage()
 {
-    return "Not a valid action.\n";
+    return "Cannot bet $" + std::to_string(bet) + "\n";
 }
 
 Player::Player()
@@ -83,8 +83,10 @@ Player::Player(int ID)
 void Player::setBet(double newBet)
 {
     double money = checkMoney();
-    if(money < newBet)
+    if (money < newBet)
         throw Player::InsufficientBalance(newBet,money);
+    else if (newBet == 0)
+        throw Player::NoBet(newBet);
     else
         bet1 = newBet;
 }

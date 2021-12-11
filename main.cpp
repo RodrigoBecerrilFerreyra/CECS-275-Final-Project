@@ -70,6 +70,32 @@ int main()
                 {
                     std::cerr << e.getErrorMessage() << "\n";
                 }
+                catch(Player::NoBet &e)
+                {
+                    std::cerr << e.getErrorMessage() << "\n";
+                }
+            } while(validBet == 0);
+        }
+        catch(Player::NoBet &e)
+        {
+            std::cerr << e.getErrorMessage() << "\n";
+            do 
+            {
+                std::cout << "Please input a valid bet.\n";
+                std::cin >> userBet;
+                try
+                {
+                    player.setBet(userBet);
+                    validBet = 1;
+                }
+                catch(Player::InsufficientBalance &e)
+                {
+                    std::cerr << e.getErrorMessage() << "\n";
+                }
+                catch(Player::NoBet &e)
+                {
+                    std::cerr << e.getErrorMessage() << "\n";
+                }
             } while(validBet == 0);
         }
         std::cout << "************************************************\n";
