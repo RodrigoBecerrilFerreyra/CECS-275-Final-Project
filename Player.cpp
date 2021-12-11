@@ -39,7 +39,8 @@ Player::Player()
     hand1 = hand2 = nullptr;
     value1 = value2 = 0;
     playerType = 0;
-    bet = 0;
+    bet1 = 0;
+    bet2 = 0;
     playerRef = nullptr;
 }
 
@@ -75,19 +76,30 @@ Player::Player(int ID)
         // Default to playerType of dealer.
         playerType = 0;
     } 
-    bet = 0;
+    bet1 = 0;
+    bet2 = 0;
 }
 
-double Player::setBet(double newBet)
+void Player::setBet(double newBet)
 {
     double money = checkMoney();
     if(money < newBet)
-        throw Account::NumNegative();
+        throw Player::InsufficientBalance(newBet,money);
     else
-        bet = newBet;
+        bet1 = newBet;
 }
 
-unsigned int Player::takeAction()
+void Player::setBet()
+{
+    // Verify once more that this is a possible bet.
+    double money = checkMoney();
+    if(money < bet1*2)
+        throw Player::InsufficientBalance(bet1,money);
+    else
+        bet2 = bet1;
+}
+
+unsigned int Player::takeAction(unsigned int action)
 {
     // TODO: 
     // Implement [Hit] logic
@@ -117,7 +129,7 @@ bool Player::canSplit()
     // ...then verify that each "half" is present. (e.g. 14 == 2*7)
     if (hand1->countCards(check) == 2)
     {
-        if (bet*2 < checkMoney())
+        if (bet1*2 < checkMoney())
             return true;
         else
             return false;

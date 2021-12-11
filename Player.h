@@ -69,23 +69,22 @@ class Player
          */
         Player(int ID);
 
-        /**
-         * Copy constructor to copy the hands and Account of another Player.
-         */ 
-        Player(Player const &other);
-        // THIS HAS NOT YET BEEN IMPLEMENTED
-
         /** This enum specifies the action that the user takes after
         receiving a card. */
         enum action {HIT, HOLD, BUST};
 
         /**
-         * Accepts a user's bet to begin the game.
+         * Overloaded function acepts a user's bet to begin the game.
          * @param newBet  Desired sum to bet for new game.
          * @throws InsufficientBalance if user bets more than account holds.
-         * @return Remaining balance in account.
          */
-        double setBet(double newBet);
+        void setBet(double newBet);
+        /**
+         * Overloaded function copies the value of bet1 over to bet2. 
+         * Used when splitting.
+         * @throws InsufficientBalance if user bets more than account holds.
+         */
+        void setBet();
 
         /**
          * Getter function for hand/value1. 
@@ -103,9 +102,10 @@ class Player
         /**
          * Has the player decide what to do in the current state of the game.
          * Should be called after receiving a card.
+         * @param action   User's action.
          * @returns The action to be taken by the Player.
          */
-        unsigned int takeAction();
+        unsigned int takeAction(unsigned int action);
 
         /**
          * Generates a display of what actions the Player can take.
@@ -162,7 +162,7 @@ class Player
         int value1, value2;       // the values of each hand
         int playerType;           // 0 for "Dealer" or 1 for "Player"
         Account *playerRef;       // Defines Player's statistics
-        double bet;               // Player's current bet
+        double bet1, bet2;        // Player's current bets
 };
 
 #endif//PLAYER_H
