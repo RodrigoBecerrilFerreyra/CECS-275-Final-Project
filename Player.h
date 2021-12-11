@@ -13,6 +13,7 @@
 #include <string>
 #include "CardList.h"
 #include "Account.h"
+#include <iostream>
 
 /**
  * The Player class is responsible for all operations having to do with a Player
