@@ -145,6 +145,15 @@ class Player
          */
         int getValue(int corrVal)
             {return (corrVal % 2 == 0) ? value1 : value2;}
+        
+        /**
+         * Wrapper for CardList::compareFirstTwoCards. Only works on hand1.
+         * @return True if the first two cards have the same value,
+         * false if they do not (or if there are less than two cards).
+         */
+        bool splitCondition()
+            {return hand1.compareFirstTwoCards();}
+
     private:
         CardList hand1, hand2;    // the hands to hold the CardLists
         int value1, value2;       // the values of each hand
