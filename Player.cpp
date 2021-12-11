@@ -26,7 +26,6 @@ std::string Player::InsufficientBalance::getErrorMessage()
 
 Player::Player()
 {
-    hand1 = hand2 = nullptr;
     value1 = value2 = 0;
     playerType = 0;
     playerRef = nullptr;
@@ -34,7 +33,6 @@ Player::Player()
 
 Player::Player(int ID)
 {
-    hand1 = hand2 = nullptr;
     playerRef = nullptr;
     value1 = value2 = 0;
     // If ID is a positive value, attempt to load/save account.
@@ -82,7 +80,7 @@ unsigned int Player::takeAction()
 void Player::drawCard(int hand, CardList &deck, int count)
 {
     // sets the hand to hand1 or hand2
-    CardList* chosenHand = (hand == 1) ? hand1 : hand2;
+    CardList* chosenHand = (hand == 1) ? &hand1 : &hand2;
 
     deck.transferTo(*chosenHand, count);
     if (playerType)
@@ -91,9 +89,9 @@ void Player::drawCard(int hand, CardList &deck, int count)
         std::cout << chosenHand->outputBlackjack();
 }
 
-void Player::returnCards(CardList deck, CardList* hand)
+void Player::returnCards(CardList &deck, CardList &hand)
 {
-    hand->transferTo(deck);
+    hand.transferTo(deck);
 }
 
 void Player::updateVal(int corrVal)
@@ -102,9 +100,9 @@ void Player::updateVal(int corrVal)
     // Input is 0, 2, 4, etc. Ideally the input is 0 for hand1.
     if(corrVal % 2 == 0)
     {
-        value1 = hand1->listValue();
+        value1 = hand1.listValue();
         // Special handling for Aces being both 1 and 11.
-        numAces = hand1->countCards(1);
+        numAces = hand1.countCards(1);
         if (numAces)
         {
             value1 += numAces*10;
@@ -118,9 +116,9 @@ void Player::updateVal(int corrVal)
             }
         }
     } else {
-        value2 = hand2->listValue();
+        value2 = hand2.listValue();
         // Special handling for Aces being both 1 and 11.
-        numAces = hand2->countCards(1);
+        numAces = hand2.countCards(1);
         if (numAces)
         {
             value2 += numAces*10;

@@ -83,7 +83,7 @@ class Player
          * @param deck   Card pool to place Player's cards back into. 
          * @param hand   Player's hand to remove cards from.
          */
-        void returnCards(CardList deck, CardList* hand);
+        void returnCards(CardList &deck, CardList &hand);
 
         /**
          * Wrapper function for checking the user's current balance in 
@@ -107,7 +107,7 @@ class Player
         void prevAccount()
             { if (playerType) playerRef->load(); }
     private:
-        CardList *hand1, *hand2;  // the hands to hold the CardLists
+        CardList hand1, hand2;    // the hands to hold the CardLists
         int value1, value2;       // the values of each hand
         int playerType;           // 0 for "Dealer" or 1 for "Player"
         Account *playerRef;       // Defines Player's statistics
