@@ -62,16 +62,19 @@ int main()
 
         // hand 1
         std::cout << "Now playing: hand 1.\n";
+        player.hand1.outputPretty();
+        std::cout << "Value: " << player.getValue(0) << "\n";
         while(true)
         {
+            if(player.getValue(0) >= 21)
+                break;
+
             std::cout << "Enter 0 for hit, 1 for stand: ";
             std::cin >> useroption;
             if(useroption == 0) // hit
             {
                 player.drawCard(0, deck, 1);
-                std::cout << "value: " << player.getValue(0) << "\n";
-                if(player.getValue(0) >= 21)
-                    break;
+                std::cout << "Value: " << player.getValue(0) << "\n";
             }
             else // stand
                 break;
@@ -81,15 +84,19 @@ int main()
         if(splitflag)
         {
             std::cout << "Now playing: hand 2.\n";
+            player.hand2.outputPretty();
+            std::cout << "Value: " << player.getValue(1) << "\n";
             while(true)
             {
+                if(player.getValue(1) >= 21)
+                    break;
+
                 std::cout << "Enter 0 for hit, 1 for stand: ";
                 std::cin >> useroption;
                 if(useroption == 0) // hit
                 {
                     player.drawCard(1, deck, 1);
-                    if(player.getValue(1) >= 21)
-                        break;
+                    std::cout << "Value: " << player.getValue(1) << "\n";
                 }
                 else // stand
                     break;
